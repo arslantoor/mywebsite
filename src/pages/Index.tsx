@@ -5,6 +5,7 @@ import { ProjectsSection } from '@/components/ProjectsSection';
 import { TechStackSection } from '@/components/TechStackSection';
 import { BlogSection } from '@/components/BlogSection';
 import { LinkedInInsights } from '@/components/LinkedInInsights';
+import { ContactSection } from '@/components/ContactSection';
 import { ChatBot } from '@/components/ChatBot';
 import { Footer } from '@/components/Footer';
 
@@ -24,6 +25,7 @@ const Index = () => {
         <TechStackSection />
         <BlogSection />
         <LinkedInInsights />
+        <ContactSection />
       </main>
       
       {/* Footer */}
