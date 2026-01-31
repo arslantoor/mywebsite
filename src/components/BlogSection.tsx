@@ -1,30 +1,44 @@
 import { motion } from 'framer-motion';
 import { BookOpen, Calendar, Clock, ArrowRight, Linkedin, Share2 } from 'lucide-react';
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
+import { useBlogPosts, BlogPost } from '@/hooks/useBlogPosts';
 
-const blogPosts = [
+// Fallback posts when no DB posts exist
+const fallbackPosts: Array<{
+  id: string;
+  title: string;
+  excerpt: string;
+  created_at: string;
+  published_at?: string | null;
+  read_time: string;
+  tags: string[];
+}> = [
   {
     id: '1',
     title: 'Building Production-Ready RAG Systems: Lessons from 50 Deployments',
     excerpt: 'After deploying RAG systems across various domains, here are the patterns that consistently deliver high-quality results...',
-    date: 'Jan 28, 2026',
-    readTime: '8 min read',
+    created_at: '2026-01-28',
+    published_at: '2026-01-28',
+    read_time: '8 min read',
     tags: ['RAG', 'LLM', 'Production'],
   },
   {
     id: '2',
     title: 'Multi-Agent Orchestration: Beyond Simple Chains',
     excerpt: 'When single agents hit their limits, orchestrating multiple specialized agents becomes essential. Here\'s how...',
-    date: 'Jan 22, 2026',
-    readTime: '12 min read',
+    created_at: '2026-01-22',
+    published_at: '2026-01-22',
+    read_time: '12 min read',
     tags: ['Agents', 'Architecture'],
   },
   {
     id: '3',
     title: 'The FastMCP Protocol: A New Standard for Tool Integration',
     excerpt: 'Exploring the Model Context Protocol and how it\'s changing the way we connect LLMs to external tools...',
-    date: 'Jan 15, 2026',
-    readTime: '6 min read',
+    created_at: '2026-01-15',
+    published_at: '2026-01-15',
+    read_time: '6 min read',
     tags: ['MCP', 'Tools', 'Integration'],
   },
 ];
@@ -45,9 +59,21 @@ const item = {
 };
 
 export const BlogSection = () => {
+  const { data: dbPosts = [] } = useBlogPosts();
   const [sharePreview, setSharePreview] = useState<string | null>(null);
 
-  const generateLinkedInPost = (post: typeof blogPosts[0]) => {
+  // Use DB posts if available, otherwise show fallback
+  const blogPosts = dbPosts.length > 0 ? dbPosts.slice(0, 3) : fallbackPosts;
+
+  const formatDate = (dateString: string) => {
+    return new Date(dateString).toLocaleDateString('en-US', {
+      month: 'short',
+      day: 'numeric',
+      year: 'numeric',
+    });
+  };
+
+  const generateLinkedInPost = (post: any) => {
     return `🚀 New Post: ${post.title}
 
 ${post.excerpt}
@@ -123,11 +149,11 @@ Read more on my blog →
                   <div className="flex items-center gap-4 text-xs text-muted-foreground">
                     <span className="flex items-center gap-1.5">
                       <Calendar className="w-3.5 h-3.5" />
-                      {post.date}
+                      {formatDate(post.published_at || post.created_at)}
                     </span>
                     <span className="flex items-center gap-1.5">
                       <Clock className="w-3.5 h-3.5" />
-                      {post.readTime}
+                      {post.read_time}
                     </span>
                   </div>
                 </div>
@@ -189,10 +215,10 @@ Read more on my blog →
           transition={{ delay: 0.3 }}
           className="text-center mt-10"
         >
-          <button className="inline-flex items-center gap-2 text-primary hover:text-primary/80 font-medium transition-colors">
+          <Link to="/blog" className="inline-flex items-center gap-2 text-primary hover:text-primary/80 font-medium transition-colors">
             View all posts
             <ArrowRight className="w-4 h-4" />
-          </button>
+          </Link>
         </motion.div>
       </div>
     </section>
