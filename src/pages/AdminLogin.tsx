@@ -12,13 +12,33 @@ const AdminLogin = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [isLoading, setIsLoading] = useState(false);
-  const { signIn } = useAuth();
+  const [isSignUp, setIsSignUp] = useState(false);
+  const { signIn, signUp } = useAuth();
   const navigate = useNavigate();
   const { toast } = useToast();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsLoading(true);
+
+    if (isSignUp) {
+      const { error } = await signUp(email, password);
+      if (error) {
+        toast({
+          title: 'Sign up failed',
+          description: error.message,
+          variant: 'destructive',
+        });
+        setIsLoading(false);
+        return;
+      }
+      toast({ 
+        title: 'Check your email!', 
+        description: 'We sent you a verification link. Please verify your email to continue.' 
+      });
+      setIsLoading(false);
+      return;
+    }
 
     const { error } = await signIn(email, password);
 
@@ -60,8 +80,10 @@ const AdminLogin = () => {
               <Terminal className="w-6 h-6 text-primary" />
             </div>
             <div>
-              <h1 className="text-xl font-bold">Admin Login</h1>
-              <p className="text-sm text-muted-foreground">Sign in to manage your blog</p>
+              <h1 className="text-xl font-bold">{isSignUp ? 'Create Account' : 'Admin Login'}</h1>
+              <p className="text-sm text-muted-foreground">
+                {isSignUp ? 'Sign up to get started' : 'Sign in to manage your blog'}
+              </p>
             </div>
           </div>
 
@@ -104,13 +126,23 @@ const AdminLogin = () => {
               {isLoading ? (
                 <>
                   <Loader2 className="w-4 h-4 mr-2 animate-spin" />
-                  Signing in...
+                  {isSignUp ? 'Creating account...' : 'Signing in...'}
                 </>
               ) : (
-                'Sign In'
+                isSignUp ? 'Create Account' : 'Sign In'
               )}
             </Button>
           </form>
+
+          <div className="mt-6 text-center">
+            <button
+              type="button"
+              onClick={() => setIsSignUp(!isSignUp)}
+              className="text-sm text-muted-foreground hover:text-primary transition-colors"
+            >
+              {isSignUp ? 'Already have an account? Sign in' : "Don't have an account? Sign up"}
+            </button>
+          </div>
         </div>
       </motion.div>
     </div>
