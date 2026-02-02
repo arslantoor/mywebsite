@@ -8,6 +8,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useAuth, useIsAdmin } from '@/hooks/useAuth';
 import { useBlogPosts, useCreateBlogPost, useUpdateBlogPost, useDeleteBlogPost, BlogPost } from '@/hooks/useBlogPosts';
 import { NeuralBackground } from '@/components/NeuralBackground';
+import { RichTextEditor } from '@/components/RichTextEditor';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Button } from '@/components/ui/button';
@@ -284,11 +285,10 @@ Read more on my blog →
             </div>
             <div className="space-y-2">
               <label className="text-sm font-medium">Content</label>
-              <Textarea
-                value={editingPost.content}
-                onChange={(e) => setEditingPost({ ...editingPost, content: e.target.value })}
-                placeholder="Full blog post content..."
-                rows={12}
+              <RichTextEditor
+                content={editingPost.content}
+                onChange={(content) => setEditingPost({ ...editingPost, content })}
+                placeholder="Start writing your blog post..."
               />
             </div>
             <div className="grid grid-cols-2 gap-4">
