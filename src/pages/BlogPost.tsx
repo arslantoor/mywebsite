@@ -196,11 +196,8 @@ Read more on my blog →
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.3 }}
             className="prose prose-invert prose-lg max-w-none"
-          >
-            <div className="whitespace-pre-wrap text-foreground/90 leading-relaxed">
-              {post.content}
-            </div>
-          </motion.div>
+            dangerouslySetInnerHTML={{ __html: post.content }}
+          />
         </article>
       </main>
 
