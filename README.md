@@ -1,73 +1,105 @@
-# Welcome to your Lovable project
+# Muhammad Arslan Toor - Portfolio
 
-## Project info
+Portfolio website showcasing projects, technical expertise, and insights from a Senior AI Engineer specializing in Agentic Workflows, Neural Frameworks, and production-grade ML systems.
 
-**URL**: https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID
+## About
 
-## How can I edit this code?
+This is the personal portfolio website of **Muhammad Arslan Toor**, a Senior AI Engineer with 6+ years of experience in AI/ML engineering. The portfolio features:
 
-There are several ways of editing your application.
+- **Projects Showcase**: AI systems, agentic workflows, and neural frameworks
+- **Tech Stack**: Comprehensive display of technical expertise
+- **Blog**: Insights, tutorials, and deep-dives into AI engineering
+- **Interactive Chatbot**: AI assistant answering questions about experience and projects
+- **Contact Form**: Direct communication channel
 
-**Use Lovable**
-
-Simply visit the [Lovable Project](https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID) and start prompting.
-
-Changes made via Lovable will be committed automatically to this repo.
-
-**Use your preferred IDE**
-
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
-
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
-
-Follow these steps:
-
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
-
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
-
-# Step 3: Install the necessary dependencies.
-npm i
-
-# Step 4: Start the development server with auto-reloading and an instant preview.
-npm run dev
-```
-
-**Edit a file directly in GitHub**
-
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
-
-**Use GitHub Codespaces**
-
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
-
-## What technologies are used for this project?
+## Technologies
 
 This project is built with:
 
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
+- **Vite** - Build tool and dev server
+- **TypeScript** - Type-safe JavaScript
+- **React 18** - UI library
+- **shadcn-ui** - Component library
+- **Tailwind CSS** - Utility-first CSS framework
+- **Framer Motion** - Animation library
+- **Supabase** - Backend (PostgreSQL, Auth, Storage)
+- **TanStack Query** - Data fetching and caching
+- **TipTap** - Rich text editor
 
-## How can I deploy this project?
+## Getting Started
 
-Simply open [Lovable](https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID) and click on Share -> Publish.
+### Prerequisites
 
-## Can I connect a custom domain to my Lovable project?
+- Node.js (v18 or higher recommended)
+- npm or yarn
 
-Yes, you can!
+### Installation
 
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
+```sh
+# Step 1: Clone the repository
+git clone <YOUR_GIT_URL>
 
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/features/custom-domain#custom-domain)
+# Step 2: Navigate to the project directory
+cd neural-command
+
+# Step 3: Install dependencies
+npm install
+
+# Step 4: Set up environment variables
+# Create a .env file with your Supabase credentials:
+# VITE_SUPABASE_URL=your_supabase_url
+# VITE_SUPABASE_PUBLISHABLE_KEY=your_supabase_key
+
+# Step 5: Start the development server
+npm run dev
+```
+
+The application will be available at `http://localhost:8080`
+
+## Available Scripts
+
+- `npm run dev` - Start development server
+- `npm run build` - Build for production
+- `npm run build:dev` - Build in development mode
+- `npm run preview` - Preview production build
+- `npm run lint` - Run ESLint
+- `npm test` - Run tests
+- `npm run test:watch` - Run tests in watch mode
+
+## Project Structure
+
+```
+neural-command/
+├── src/
+│   ├── components/     # React components
+│   ├── pages/         # Page components
+│   ├── hooks/         # Custom React hooks
+│   ├── integrations/  # External service integrations
+│   └── lib/           # Utility functions
+├── supabase/          # Database migrations
+└── public/            # Static assets
+```
+
+## Features
+
+- **Fully Responsive**: Mobile to 4K display support
+- **Neural Network Background**: Animated particle system
+- **Project Management**: Admin dashboard for managing projects and blog posts
+- **Blog System**: Rich text editor with publish/draft functionality
+- **AI Chatbot**: Interactive assistant powered by rule-based responses
+- **Authentication**: Role-based access control (Admin/User)
+
+## Deployment
+
+This project can be deployed to any static hosting service:
+
+- **Vercel**: Connect your GitHub repo and deploy
+- **Netlify**: Drag and drop the `dist` folder or connect via Git
+- **Cloudflare Pages**: Connect repository and deploy
+- **AWS S3 + CloudFront**: Upload build files to S3 bucket
+
+After building with `npm run build`, deploy the `dist` folder.
+
+## License
+
+© 2026 Muhammad Arslan Toor. All rights reserved.

@@ -4,14 +4,13 @@ import { HeroSection } from '@/components/HeroSection';
 import { ProjectsSection } from '@/components/ProjectsSection';
 import { TechStackSection } from '@/components/TechStackSection';
 import { BlogSection } from '@/components/BlogSection';
-import { LinkedInInsights } from '@/components/LinkedInInsights';
 import { ContactSection } from '@/components/ContactSection';
 import { ChatBot } from '@/components/ChatBot';
 import { Footer } from '@/components/Footer';
 
 const Index = () => {
   return (
-    <div className="min-h-screen bg-background text-foreground overflow-x-hidden">
+    <div className="min-h-screen bg-background text-foreground overflow-x-hidden max-w-full">
       {/* Neural Network Background */}
       <NeuralBackground />
       
@@ -24,7 +23,6 @@ const Index = () => {
         <ProjectsSection />
         <TechStackSection />
         <BlogSection />
-        <LinkedInInsights />
         <ContactSection />
       </main>
       

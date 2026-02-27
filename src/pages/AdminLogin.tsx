@@ -82,7 +82,7 @@ const AdminLogin = () => {
             <div>
               <h1 className="text-xl font-bold">{isSignUp ? 'Create Account' : 'Admin Login'}</h1>
               <p className="text-sm text-muted-foreground">
-                {isSignUp ? 'Sign up to get started' : 'Sign in to manage your blog'}
+                {isSignUp ? 'Sign up to get started' : 'Muhammad Arslan Toor - Senior AI Engineer'}
               </p>
             </div>
           </div>

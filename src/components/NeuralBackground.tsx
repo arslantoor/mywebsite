@@ -20,30 +20,46 @@ export const NeuralBackground = () => {
     const ctx = canvas.getContext('2d');
     if (!ctx) return;
 
+    const getParticleCount = () => {
+      const width = window.innerWidth;
+      const height = window.innerHeight;
+      const area = width * height;
+      
+      if (width < 640) return Math.min(40, Math.floor(area / 20000)); // Mobile
+      if (width < 1024) return Math.min(60, Math.floor(area / 18000)); // Tablet
+      if (width < 1920) return Math.min(80, Math.floor(area / 15000)); // Desktop
+      if (width < 2560) return Math.min(120, Math.floor(area / 12000)); // Large Desktop
+      return Math.min(150, Math.floor(area / 10000)); // 4K
+    };
+    
+    const initializeParticles = () => {
+      const particleCount = getParticleCount();
+      particlesRef.current = Array.from({ length: particleCount }, () => ({
+        x: Math.random() * canvas.width,
+        y: Math.random() * canvas.height,
+        vx: (Math.random() - 0.5) * 0.5,
+        vy: (Math.random() - 0.5) * 0.5,
+        connections: [],
+      }));
+    };
+
     const resizeCanvas = () => {
       canvas.width = window.innerWidth;
       canvas.height = window.innerHeight;
+      // Reinitialize particles on resize for better responsiveness
+      initializeParticles();
     };
 
     resizeCanvas();
     window.addEventListener('resize', resizeCanvas);
-
-    // Initialize particles
-    const particleCount = Math.min(80, Math.floor((window.innerWidth * window.innerHeight) / 15000));
-    particlesRef.current = Array.from({ length: particleCount }, () => ({
-      x: Math.random() * canvas.width,
-      y: Math.random() * canvas.height,
-      vx: (Math.random() - 0.5) * 0.5,
-      vy: (Math.random() - 0.5) * 0.5,
-      connections: [],
-    }));
 
     const animate = () => {
       ctx.fillStyle = 'rgba(10, 10, 15, 0.1)';
       ctx.fillRect(0, 0, canvas.width, canvas.height);
 
       const particles = particlesRef.current;
-      const connectionDistance = 150;
+      // Scale connection distance based on screen size
+      const connectionDistance = window.innerWidth >= 2560 ? 250 : window.innerWidth >= 1920 ? 200 : window.innerWidth >= 1280 ? 150 : 120;
 
       // Update and draw particles
       particles.forEach((particle, i) => {
