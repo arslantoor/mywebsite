@@ -48,24 +48,24 @@ export const ProjectsSection = () => {
   const projectImages = selectedProject ? getProjectImages(selectedProject.id) : [];
 
   return (
-    <section id="projects" className="py-24 relative">
-      <div className="container mx-auto px-6">
+    <section id="projects" className="py-12 sm:py-16 md:py-20 lg:py-24 xl:py-28 2xl:py-32 relative">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 xl:px-12 2xl:px-16 3xl:px-20 4xl:px-24">
         {/* Section Header */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5 }}
-          className="text-center mb-16"
+          className="text-center mb-8 sm:mb-12 md:mb-16 lg:mb-20"
         >
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass-card mb-4">
-            <Cpu className="w-4 h-4 text-primary" />
-            <span className="text-sm font-mono text-muted-foreground">Featured Work</span>
+          <div className="inline-flex items-center gap-2 px-3 sm:px-4 py-1.5 sm:py-2 rounded-full glass-card mb-3 sm:mb-4">
+            <Cpu className="w-3 h-3 sm:w-4 sm:h-4 lg:w-5 lg:h-5 text-primary" />
+            <span className="text-xs sm:text-sm lg:text-base font-mono text-muted-foreground">Featured Work</span>
           </div>
-          <h2 className="text-4xl md:text-5xl font-bold mb-4">
+          <h2 className="text-3xl xs:text-4xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl 2xl:text-8xl 3xl:text-9xl font-bold mb-3 sm:mb-4 lg:mb-6">
             <span className="gradient-text">Projects</span>
           </h2>
-          <p className="text-muted-foreground max-w-2xl mx-auto">
+          <p className="text-sm sm:text-base lg:text-lg xl:text-xl 2xl:text-2xl text-muted-foreground max-w-2xl lg:max-w-3xl xl:max-w-4xl mx-auto px-4">
             A showcase of AI systems, agentic workflows, and neural frameworks built to solve real-world challenges.
           </p>
         </motion.div>
@@ -86,7 +86,7 @@ export const ProjectsSection = () => {
             initial="hidden"
             whileInView="show"
             viewport={{ once: true }}
-            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 auto-rows-[200px]"
+            className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-4 3xl:grid-cols-5 4xl:grid-cols-6 gap-3 sm:gap-4 lg:gap-6 xl:gap-8 auto-rows-[180px] sm:auto-rows-[200px] lg:auto-rows-[240px] xl:auto-rows-[280px] 2xl:auto-rows-[320px]"
           >
             {projects.map((project, index) => {
               const images = getProjectImages(project.id);
@@ -100,7 +100,7 @@ export const ProjectsSection = () => {
                     setSelectedProject(project);
                     setCurrentImageIndex(0);
                   }}
-                  className={`group relative glass-card-hover p-6 flex flex-col justify-between overflow-hidden cursor-pointer ${getSizeClass(index, projects.length)}`}
+                  className={`group relative glass-card-hover p-4 sm:p-5 md:p-6 lg:p-8 flex flex-col justify-between overflow-hidden cursor-pointer ${getSizeClass(index, projects.length)}`}
                 >
                   {/* Cover image background */}
                   {coverImage && (
@@ -120,7 +120,7 @@ export const ProjectsSection = () => {
                       </div>
                     )}
 
-                    <h3 className="text-xl font-semibold text-foreground mb-2 group-hover:text-primary transition-colors">
+                    <h3 className="text-base sm:text-lg md:text-xl lg:text-2xl xl:text-3xl font-semibold text-foreground mb-2 group-hover:text-primary transition-colors">
                       {project.title}
                     </h3>
 
@@ -195,7 +195,7 @@ export const ProjectsSection = () => {
 
       {/* Project Detail Dialog */}
       <Dialog open={!!selectedProject} onOpenChange={() => setSelectedProject(null)}>
-        <DialogContent className="max-w-3xl max-h-[90vh] overflow-y-auto p-0">
+        <DialogContent className="max-w-[95vw] sm:max-w-2xl md:max-w-3xl lg:max-w-4xl xl:max-w-5xl 2xl:max-w-6xl 3xl:max-w-7xl 4xl:max-w-[2400px] max-h-[90vh] overflow-y-auto p-0">
           {selectedProject && (
             <div>
               {/* Image carousel */}
@@ -247,7 +247,7 @@ export const ProjectsSection = () => {
                 </div>
               )}
 
-              <div className="p-6 space-y-4">
+              <div className="p-4 sm:p-6 lg:p-8 xl:p-10 space-y-4 sm:space-y-5 lg:space-y-6">
                 <div className="flex items-start justify-between gap-4">
                   <div>
                     {selectedProject.badge && (
@@ -256,7 +256,7 @@ export const ProjectsSection = () => {
                         <span className="text-xs font-medium text-primary">{selectedProject.badge}</span>
                       </div>
                     )}
-                    <h2 className="text-2xl font-bold text-foreground">{selectedProject.title}</h2>
+                    <h2 className="text-xl sm:text-2xl lg:text-3xl xl:text-4xl font-bold text-foreground">{selectedProject.title}</h2>
                   </div>
                 </div>
 

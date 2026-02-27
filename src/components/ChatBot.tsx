@@ -132,9 +132,9 @@ export const ChatBot = () => {
             animate={{ scale: 1, opacity: 1 }}
             exit={{ scale: 0, opacity: 0 }}
             onClick={() => setIsOpen(true)}
-            className="fixed bottom-6 right-6 z-50 p-4 rounded-full bg-primary text-primary-foreground shadow-lg shadow-primary/25 hover:shadow-primary/40 transition-shadow animate-glow-pulse"
+            className="fixed bottom-4 right-4 sm:bottom-6 sm:right-6 lg:bottom-8 lg:right-8 xl:bottom-10 xl:right-10 2xl:bottom-12 2xl:right-12 z-50 p-3 sm:p-4 lg:p-5 xl:p-6 rounded-full bg-primary text-primary-foreground shadow-lg shadow-primary/25 hover:shadow-primary/40 transition-shadow animate-glow-pulse"
           >
-            <Bot className="w-6 h-6" />
+            <Bot className="w-5 h-5 sm:w-6 sm:h-6 lg:w-7 lg:h-7" />
           </motion.button>
         )}
       </AnimatePresence>
@@ -148,11 +148,14 @@ export const ChatBot = () => {
               opacity: 1, 
               y: 0, 
               scale: 1,
-              height: isMinimized ? 'auto' : 500,
+            }}
+            style={{
+              height: isMinimized ? 'auto' : undefined,
+              maxHeight: isMinimized ? 'auto' : 'min(600px, calc(100vh - 8rem))',
             }}
             exit={{ opacity: 0, y: 20, scale: 0.95 }}
             transition={{ duration: 0.2 }}
-            className="fixed bottom-6 right-6 z-50 w-[380px] glass-card border border-primary/20 overflow-hidden flex flex-col"
+            className="fixed bottom-4 right-4 sm:bottom-6 sm:right-6 z-50 w-[calc(100vw-2rem)] sm:w-[380px] md:w-[420px] lg:w-[480px] xl:w-[520px] 2xl:w-[560px] 3xl:w-[600px] max-w-[calc(100vw-2rem)] sm:max-w-[380px] md:max-w-[420px] lg:max-w-[480px] xl:max-w-[520px] 2xl:max-w-[560px] 3xl:max-w-[600px] glass-card border border-primary/20 overflow-hidden flex flex-col"
           >
             {/* Header */}
             <div className="flex items-center justify-between p-4 border-b border-border/50 bg-secondary/50">
@@ -164,8 +167,8 @@ export const ChatBot = () => {
                   <span className="absolute -bottom-0.5 -right-0.5 w-3 h-3 bg-green-500 rounded-full border-2 border-card" />
                 </div>
                 <div>
-                  <h3 className="font-semibold text-sm text-foreground">Arslan AI Lite</h3>
-                  <p className="text-xs text-muted-foreground">Online • Ask me anything</p>
+                  <h3 className="font-semibold text-xs sm:text-sm lg:text-base text-foreground">Arslan AI Lite</h3>
+                  <p className="text-[10px] sm:text-xs text-muted-foreground">Online • Ask me anything</p>
                 </div>
               </div>
               <div className="flex items-center gap-1">
@@ -196,7 +199,7 @@ export const ChatBot = () => {
                       className={`flex ${message.role === 'user' ? 'justify-end' : 'justify-start'}`}
                     >
                       <div
-                        className={`max-w-[85%] px-4 py-2.5 rounded-2xl text-sm ${
+                        className={`max-w-[85%] px-3 sm:px-4 py-2 sm:py-2.5 rounded-2xl text-xs sm:text-sm lg:text-base ${
                           message.role === 'user'
                             ? 'bg-primary text-primary-foreground rounded-br-md'
                             : 'bg-secondary text-foreground rounded-bl-md'
@@ -252,7 +255,7 @@ export const ChatBot = () => {
                       onChange={(e) => setInput(e.target.value)}
                       onKeyDown={(e) => e.key === 'Enter' && handleSend()}
                       placeholder="Ask about skills, projects..."
-                      className="flex-1 bg-secondary rounded-lg px-4 py-2.5 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/50"
+                      className="flex-1 bg-secondary rounded-lg px-3 sm:px-4 py-2 sm:py-2.5 text-xs sm:text-sm lg:text-base text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/50"
                     />
                     <button
                       onClick={() => handleSend()}
