@@ -2,16 +2,18 @@ import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { 
   Plus, Edit, Trash2, Eye, EyeOff, LogOut, ArrowLeft, 
-  Save, X, Linkedin, Loader2, Send, BookOpen 
+  Save, X, Linkedin, Loader2, Send, BookOpen, FolderKanban
 } from 'lucide-react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth, useIsAdmin } from '@/hooks/useAuth';
 import { useBlogPosts, useCreateBlogPost, useUpdateBlogPost, useDeleteBlogPost, BlogPost } from '@/hooks/useBlogPosts';
 import { NeuralBackground } from '@/components/NeuralBackground';
 import { RichTextEditor } from '@/components/RichTextEditor';
+import { ProjectManagement } from '@/components/ProjectManagement';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Button } from '@/components/ui/button';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { useToast } from '@/hooks/use-toast';
 import {
   Dialog,
@@ -115,13 +117,7 @@ const Admin = () => {
   };
 
   const generateLinkedInPost = (post: BlogPost) => {
-    return `🚀 New Post: ${post.title}
-
-${post.excerpt}
-
-Read more on my blog →
-
-#AI #${post.tags.join(' #')} #TechLeadership`;
+    return `🚀 New Post: ${post.title}\n\n${post.excerpt}\n\nRead more on my blog →\n\n#AI #${post.tags.join(' #')} #TechLeadership`;
   };
 
   const handleLogout = async () => {
@@ -145,10 +141,7 @@ Read more on my blog →
                 <ArrowLeft className="w-4 h-4" />
                 Back
               </Link>
-              <div className="flex items-center gap-2">
-                <BookOpen className="w-5 h-5 text-primary" />
-                <h1 className="text-xl font-bold">Blog Admin</h1>
-              </div>
+              <h1 className="text-xl font-bold">Admin Dashboard</h1>
             </div>
             <div className="flex items-center gap-4">
               <span className="text-sm text-muted-foreground">{user.email}</span>
@@ -161,105 +154,105 @@ Read more on my blog →
         </header>
 
         <main className="container mx-auto px-6 py-8">
-          {/* Actions */}
-          <div className="flex items-center justify-between mb-8">
-            <h2 className="text-2xl font-bold gradient-text">Manage Posts</h2>
-            <Button onClick={handleNew} className="bg-primary hover:bg-primary/90">
-              <Plus className="w-4 h-4 mr-2" />
-              New Post
-            </Button>
-          </div>
+          <Tabs defaultValue="projects" className="space-y-8">
+            <TabsList className="bg-secondary/50">
+              <TabsTrigger value="projects" className="gap-2">
+                <FolderKanban className="w-4 h-4" />
+                Projects
+              </TabsTrigger>
+              <TabsTrigger value="blog" className="gap-2">
+                <BookOpen className="w-4 h-4" />
+                Blog Posts
+              </TabsTrigger>
+            </TabsList>
 
-          {/* Posts List */}
-          {postsLoading ? (
-            <div className="grid gap-4">
-              {[...Array(3)].map((_, i) => (
-                <div key={i} className="glass-card p-6 animate-pulse">
-                  <div className="h-6 bg-secondary rounded w-1/3 mb-2" />
-                  <div className="h-4 bg-secondary rounded w-2/3" />
+            <TabsContent value="projects">
+              <ProjectManagement />
+            </TabsContent>
+
+            <TabsContent value="blog">
+              {/* Blog Actions */}
+              <div className="flex items-center justify-between mb-8">
+                <h2 className="text-2xl font-bold gradient-text">Manage Posts</h2>
+                <Button onClick={handleNew} className="bg-primary hover:bg-primary/90">
+                  <Plus className="w-4 h-4 mr-2" />
+                  New Post
+                </Button>
+              </div>
+
+              {/* Posts List */}
+              {postsLoading ? (
+                <div className="grid gap-4">
+                  {[...Array(3)].map((_, i) => (
+                    <div key={i} className="glass-card p-6 animate-pulse">
+                      <div className="h-6 bg-secondary rounded w-1/3 mb-2" />
+                      <div className="h-4 bg-secondary rounded w-2/3" />
+                    </div>
+                  ))}
                 </div>
-              ))}
-            </div>
-          ) : posts.length === 0 ? (
-            <div className="text-center py-16 glass-card">
-              <BookOpen className="w-16 h-16 text-muted-foreground mx-auto mb-4" />
-              <h3 className="text-xl font-semibold mb-2">No posts yet</h3>
-              <p className="text-muted-foreground mb-6">Create your first blog post to get started</p>
-              <Button onClick={handleNew} className="bg-primary hover:bg-primary/90">
-                <Plus className="w-4 h-4 mr-2" />
-                Create First Post
-              </Button>
-            </div>
-          ) : (
-            <div className="grid gap-4">
-              {posts.map((post) => (
-                <motion.div
-                  key={post.id}
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  className="glass-card p-6"
-                >
-                  <div className="flex items-start justify-between gap-4">
-                    <div className="flex-1 min-w-0">
-                      <div className="flex items-center gap-3 mb-2">
-                        <h3 className="text-lg font-semibold truncate">{post.title}</h3>
-                        <span className={`px-2 py-0.5 rounded-full text-xs font-medium ${
-                          post.is_published 
-                            ? 'bg-green-500/20 text-green-400' 
-                            : 'bg-yellow-500/20 text-yellow-400'
-                        }`}>
-                          {post.is_published ? 'Published' : 'Draft'}
-                        </span>
+              ) : posts.length === 0 ? (
+                <div className="text-center py-16 glass-card">
+                  <BookOpen className="w-16 h-16 text-muted-foreground mx-auto mb-4" />
+                  <h3 className="text-xl font-semibold mb-2">No posts yet</h3>
+                  <p className="text-muted-foreground mb-6">Create your first blog post to get started</p>
+                  <Button onClick={handleNew} className="bg-primary hover:bg-primary/90">
+                    <Plus className="w-4 h-4 mr-2" />
+                    Create First Post
+                  </Button>
+                </div>
+              ) : (
+                <div className="grid gap-4">
+                  {posts.map((post) => (
+                    <motion.div
+                      key={post.id}
+                      initial={{ opacity: 0, y: 10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      className="glass-card p-6"
+                    >
+                      <div className="flex items-start justify-between gap-4">
+                        <div className="flex-1 min-w-0">
+                          <div className="flex items-center gap-3 mb-2">
+                            <h3 className="text-lg font-semibold truncate">{post.title}</h3>
+                            <span className={`px-2 py-0.5 rounded-full text-xs font-medium ${
+                              post.is_published 
+                                ? 'bg-green-500/20 text-green-400' 
+                                : 'bg-yellow-500/20 text-yellow-400'
+                            }`}>
+                              {post.is_published ? 'Published' : 'Draft'}
+                            </span>
+                          </div>
+                          <p className="text-muted-foreground text-sm line-clamp-2 mb-3">{post.excerpt}</p>
+                          <div className="flex flex-wrap gap-2">
+                            {post.tags.map((tag) => (
+                              <span key={tag} className="tech-chip text-xs">{tag}</span>
+                            ))}
+                          </div>
+                        </div>
+                        <div className="flex items-center gap-2">
+                          <Button variant="ghost" size="sm" onClick={() => setLinkedInPreview(post)} title="Share to LinkedIn">
+                            <Linkedin className="w-4 h-4" />
+                          </Button>
+                          <Button variant="ghost" size="sm" onClick={() => handleTogglePublish(post)} title={post.is_published ? 'Unpublish' : 'Publish'}>
+                            {post.is_published ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
+                          </Button>
+                          <Button variant="ghost" size="sm" onClick={() => handleEdit(post)}>
+                            <Edit className="w-4 h-4" />
+                          </Button>
+                          <Button variant="ghost" size="sm" onClick={() => setDeleteConfirm(post.id)} className="text-destructive hover:text-destructive">
+                            <Trash2 className="w-4 h-4" />
+                          </Button>
+                        </div>
                       </div>
-                      <p className="text-muted-foreground text-sm line-clamp-2 mb-3">{post.excerpt}</p>
-                      <div className="flex flex-wrap gap-2">
-                        {post.tags.map((tag) => (
-                          <span key={tag} className="tech-chip text-xs">{tag}</span>
-                        ))}
-                      </div>
-                    </div>
-                    <div className="flex items-center gap-2">
-                      <Button
-                        variant="ghost"
-                        size="sm"
-                        onClick={() => setLinkedInPreview(post)}
-                        title="Share to LinkedIn"
-                      >
-                        <Linkedin className="w-4 h-4" />
-                      </Button>
-                      <Button
-                        variant="ghost"
-                        size="sm"
-                        onClick={() => handleTogglePublish(post)}
-                        title={post.is_published ? 'Unpublish' : 'Publish'}
-                      >
-                        {post.is_published ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
-                      </Button>
-                      <Button
-                        variant="ghost"
-                        size="sm"
-                        onClick={() => handleEdit(post)}
-                      >
-                        <Edit className="w-4 h-4" />
-                      </Button>
-                      <Button
-                        variant="ghost"
-                        size="sm"
-                        onClick={() => setDeleteConfirm(post.id)}
-                        className="text-destructive hover:text-destructive"
-                      >
-                        <Trash2 className="w-4 h-4" />
-                      </Button>
-                    </div>
-                  </div>
-                </motion.div>
-              ))}
-            </div>
-          )}
+                    </motion.div>
+                  ))}
+                </div>
+              )}
+            </TabsContent>
+          </Tabs>
         </main>
       </div>
 
-      {/* Edit Dialog */}
+      {/* Edit Blog Post Dialog */}
       <Dialog open={isEditing} onOpenChange={setIsEditing}>
         <DialogContent className="max-w-3xl max-h-[90vh] overflow-y-auto">
           <DialogHeader>

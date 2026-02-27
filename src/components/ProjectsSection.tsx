@@ -1,70 +1,14 @@
-import { motion } from 'framer-motion';
-import { Trophy, Cpu, Layers, ExternalLink, Github, Zap } from 'lucide-react';
-
-const projects = [
-  {
-    title: 'Agentic Commerce on Arc',
-    description: 'AI-powered e-commerce platform with autonomous shopping agents that learn user preferences and execute complex purchasing workflows.',
-    badge: '1st Place Winner',
-    badgeIcon: Trophy,
-    techStack: ['LLM Orchestration', 'RAG', 'FastMCP', 'Multi-Agent'],
-    featured: true,
-    size: 'large',
-  },
-  {
-    title: 'NeuralAI Unified Framework',
-    description: 'Comprehensive framework for building, deploying, and scaling neural network architectures with built-in MLOps pipelines.',
-    badge: 'Open Source',
-    badgeIcon: Layers,
-    techStack: ['PyTorch', 'Kubernetes', 'MLFlow', 'ONNX'],
-    featured: true,
-    size: 'large',
-  },
-  {
-    title: 'Autonomous RAG Pipeline',
-    description: 'Self-optimizing retrieval system that automatically tunes embeddings and reranking based on usage patterns.',
-    badge: null,
-    badgeIcon: null,
-    techStack: ['Vector DB', 'LangChain', 'Embeddings'],
-    featured: false,
-    size: 'medium',
-  },
-  {
-    title: 'Multi-Modal Agent Studio',
-    description: 'Visual IDE for designing and testing multi-modal AI agents with real-time debugging.',
-    badge: null,
-    badgeIcon: null,
-    techStack: ['Vision AI', 'WebRTC', 'React'],
-    featured: false,
-    size: 'medium',
-  },
-  {
-    title: 'LLM Cost Optimizer',
-    description: 'Intelligent routing layer that optimizes LLM usage costs by 60%.',
-    badge: null,
-    badgeIcon: null,
-    techStack: ['API Gateway', 'Analytics'],
-    featured: false,
-    size: 'small',
-  },
-  {
-    title: 'Agentic Workflow Engine',
-    description: 'Production-grade orchestration for complex AI workflows.',
-    badge: null,
-    badgeIcon: null,
-    techStack: ['Temporal', 'FastAPI'],
-    featured: false,
-    size: 'small',
-  },
-];
+import { useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { Trophy, Cpu, Layers, ExternalLink, Github, Zap, Linkedin, Play, X, ChevronLeft, ChevronRight, Loader2 } from 'lucide-react';
+import { useProjects, useAllProjectImages, Project, ProjectImage } from '@/hooks/useProjects';
+import { Dialog, DialogContent } from '@/components/ui/dialog';
 
 const container = {
   hidden: { opacity: 0 },
   show: {
     opacity: 1,
-    transition: {
-      staggerChildren: 0.1,
-    },
+    transition: { staggerChildren: 0.1 },
   },
 };
 
@@ -73,7 +17,36 @@ const item = {
   show: { opacity: 1, y: 0 },
 };
 
+const badgeIcons: Record<string, typeof Trophy> = {
+  'trophy': Trophy,
+  'layers': Layers,
+  'zap': Zap,
+  'cpu': Cpu,
+};
+
 export const ProjectsSection = () => {
+  const { data: projects = [], isLoading } = useProjects();
+  const { data: allImages = [] } = useAllProjectImages();
+  const [selectedProject, setSelectedProject] = useState<Project | null>(null);
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
+
+  const getProjectImages = (projectId: string) =>
+    allImages.filter((img) => img.project_id === projectId);
+
+  const getSizeClass = (index: number, total: number) => {
+    if (total <= 2) return 'md:col-span-2 md:row-span-2';
+    if (index < 2) return 'md:col-span-2 md:row-span-2';
+    if (index < 4) return 'md:col-span-2 lg:col-span-1 md:row-span-1';
+    return 'md:col-span-1 md:row-span-1';
+  };
+
+  const isLarge = (index: number, total: number) => {
+    if (total <= 2) return true;
+    return index < 2;
+  };
+
+  const projectImages = selectedProject ? getProjectImages(selectedProject.id) : [];
+
   return (
     <section id="projects" className="py-24 relative">
       <div className="container mx-auto px-6">
@@ -97,83 +70,245 @@ export const ProjectsSection = () => {
           </p>
         </motion.div>
 
-        {/* Bento Grid */}
-        <motion.div
-          variants={container}
-          initial="hidden"
-          whileInView="show"
-          viewport={{ once: true }}
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 auto-rows-[200px]"
-        >
-          {projects.map((project, index) => {
-            const sizeClasses = {
-              large: 'md:col-span-2 md:row-span-2',
-              medium: 'md:col-span-2 lg:col-span-1 md:row-span-1',
-              small: 'md:col-span-1 md:row-span-1',
-            };
+        {isLoading ? (
+          <div className="flex justify-center py-16">
+            <Loader2 className="w-8 h-8 animate-spin text-primary" />
+          </div>
+        ) : projects.length === 0 ? (
+          <div className="text-center py-16 glass-card">
+            <Cpu className="w-16 h-16 text-muted-foreground mx-auto mb-4" />
+            <h3 className="text-xl font-semibold mb-2">No projects yet</h3>
+            <p className="text-muted-foreground">Projects will appear here once added via admin panel.</p>
+          </div>
+        ) : (
+          <motion.div
+            variants={container}
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true }}
+            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 auto-rows-[200px]"
+          >
+            {projects.map((project, index) => {
+              const images = getProjectImages(project.id);
+              const coverImage = images[0]?.image_url;
 
-            return (
-              <motion.div
-                key={project.title}
-                variants={item}
-                className={`group relative glass-card-hover p-6 flex flex-col justify-between overflow-hidden ${sizeClasses[project.size as keyof typeof sizeClasses]}`}
-              >
-                {/* Background gradient on hover */}
-                <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+              return (
+                <motion.div
+                  key={project.id}
+                  variants={item}
+                  onClick={() => {
+                    setSelectedProject(project);
+                    setCurrentImageIndex(0);
+                  }}
+                  className={`group relative glass-card-hover p-6 flex flex-col justify-between overflow-hidden cursor-pointer ${getSizeClass(index, projects.length)}`}
+                >
+                  {/* Cover image background */}
+                  {coverImage && (
+                    <div
+                      className="absolute inset-0 bg-cover bg-center opacity-20 group-hover:opacity-30 transition-opacity duration-500"
+                      style={{ backgroundImage: `url(${coverImage})` }}
+                    />
+                  )}
 
-                <div className="relative z-10">
-                  {/* Badge */}
-                  {project.badge && project.badgeIcon && (
-                    <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-primary/20 border border-primary/30 mb-4">
-                      <project.badgeIcon className="w-3.5 h-3.5 text-primary" />
-                      <span className="text-xs font-medium text-primary">{project.badge}</span>
+                  <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+
+                  <div className="relative z-10">
+                    {project.badge && (
+                      <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-primary/20 border border-primary/30 mb-4">
+                        <Trophy className="w-3.5 h-3.5 text-primary" />
+                        <span className="text-xs font-medium text-primary">{project.badge}</span>
+                      </div>
+                    )}
+
+                    <h3 className="text-xl font-semibold text-foreground mb-2 group-hover:text-primary transition-colors">
+                      {project.title}
+                    </h3>
+
+                    {isLarge(index, projects.length) && (
+                      <p className="text-sm text-muted-foreground line-clamp-3">
+                        {project.description}
+                      </p>
+                    )}
+                  </div>
+
+                  <div className="relative z-10">
+                    <div className="flex flex-wrap gap-2 mb-4">
+                      {project.tech_stack.slice(0, isLarge(index, projects.length) ? 4 : 2).map((tech) => (
+                        <span key={tech} className="tech-chip">{tech}</span>
+                      ))}
+                    </div>
+
+                    <div className="flex items-center gap-3 opacity-0 group-hover:opacity-100 transition-opacity">
+                      {project.github_url && (
+                        <a
+                          href={project.github_url}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          onClick={(e) => e.stopPropagation()}
+                          className="p-2 rounded-lg bg-secondary hover:bg-primary/20 text-muted-foreground hover:text-primary transition-colors"
+                        >
+                          <Github className="w-4 h-4" />
+                        </a>
+                      )}
+                      {project.live_url && (
+                        <a
+                          href={project.live_url}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          onClick={(e) => e.stopPropagation()}
+                          className="p-2 rounded-lg bg-secondary hover:bg-primary/20 text-muted-foreground hover:text-primary transition-colors"
+                        >
+                          <ExternalLink className="w-4 h-4" />
+                        </a>
+                      )}
+                      {project.linkedin_url && (
+                        <a
+                          href={project.linkedin_url}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          onClick={(e) => e.stopPropagation()}
+                          className="p-2 rounded-lg bg-secondary hover:bg-primary/20 text-muted-foreground hover:text-primary transition-colors"
+                        >
+                          <Linkedin className="w-4 h-4" />
+                        </a>
+                      )}
+                      {project.video_url && (
+                        <span className="p-2 rounded-lg bg-secondary text-muted-foreground">
+                          <Play className="w-4 h-4" />
+                        </span>
+                      )}
+                    </div>
+                  </div>
+
+                  {project.featured && (
+                    <div className="absolute top-0 right-0 w-20 h-20 overflow-hidden">
+                      <div className="absolute top-0 right-0 w-full h-full bg-gradient-to-bl from-primary/20 to-transparent" />
+                      <Zap className="absolute top-3 right-3 w-4 h-4 text-primary" />
                     </div>
                   )}
+                </motion.div>
+              );
+            })}
+          </motion.div>
+        )}
+      </div>
 
-                  <h3 className="text-xl font-semibold text-foreground mb-2 group-hover:text-primary transition-colors">
-                    {project.title}
-                  </h3>
-                  
-                  {project.size !== 'small' && (
-                    <p className="text-sm text-muted-foreground line-clamp-3">
-                      {project.description}
-                    </p>
+      {/* Project Detail Dialog */}
+      <Dialog open={!!selectedProject} onOpenChange={() => setSelectedProject(null)}>
+        <DialogContent className="max-w-3xl max-h-[90vh] overflow-y-auto p-0">
+          {selectedProject && (
+            <div>
+              {/* Image carousel */}
+              {projectImages.length > 0 && (
+                <div className="relative w-full aspect-video bg-secondary">
+                  <img
+                    src={projectImages[currentImageIndex]?.image_url}
+                    alt={`${selectedProject.title} screenshot`}
+                    className="w-full h-full object-cover"
+                  />
+                  {projectImages.length > 1 && (
+                    <>
+                      <button
+                        onClick={() => setCurrentImageIndex((i) => (i - 1 + projectImages.length) % projectImages.length)}
+                        className="absolute left-2 top-1/2 -translate-y-1/2 p-2 rounded-full bg-background/80 backdrop-blur-sm text-foreground hover:bg-background transition-colors"
+                      >
+                        <ChevronLeft className="w-5 h-5" />
+                      </button>
+                      <button
+                        onClick={() => setCurrentImageIndex((i) => (i + 1) % projectImages.length)}
+                        className="absolute right-2 top-1/2 -translate-y-1/2 p-2 rounded-full bg-background/80 backdrop-blur-sm text-foreground hover:bg-background transition-colors"
+                      >
+                        <ChevronRight className="w-5 h-5" />
+                      </button>
+                      <div className="absolute bottom-3 left-1/2 -translate-x-1/2 flex gap-1.5">
+                        {projectImages.map((_, i) => (
+                          <button
+                            key={i}
+                            onClick={() => setCurrentImageIndex(i)}
+                            className={`w-2 h-2 rounded-full transition-colors ${i === currentImageIndex ? 'bg-primary' : 'bg-foreground/30'}`}
+                          />
+                        ))}
+                      </div>
+                    </>
                   )}
                 </div>
+              )}
 
-                <div className="relative z-10">
-                  {/* Tech Chips */}
-                  <div className="flex flex-wrap gap-2 mb-4">
-                    {project.techStack.slice(0, project.size === 'small' ? 2 : 4).map((tech) => (
-                      <span key={tech} className="tech-chip">
-                        {tech}
-                      </span>
-                    ))}
-                  </div>
+              {/* Video embed */}
+              {selectedProject.video_url && (
+                <div className="w-full aspect-video">
+                  <iframe
+                    src={selectedProject.video_url}
+                    className="w-full h-full"
+                    allowFullScreen
+                    allow="autoplay; encrypted-media"
+                    title={`${selectedProject.title} video`}
+                  />
+                </div>
+              )}
 
-                  {/* Actions */}
-                  <div className="flex items-center gap-3 opacity-0 group-hover:opacity-100 transition-opacity">
-                    <button className="p-2 rounded-lg bg-secondary hover:bg-primary/20 text-muted-foreground hover:text-primary transition-colors">
-                      <Github className="w-4 h-4" />
-                    </button>
-                    <button className="p-2 rounded-lg bg-secondary hover:bg-primary/20 text-muted-foreground hover:text-primary transition-colors">
-                      <ExternalLink className="w-4 h-4" />
-                    </button>
+              <div className="p-6 space-y-4">
+                <div className="flex items-start justify-between gap-4">
+                  <div>
+                    {selectedProject.badge && (
+                      <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-primary/20 border border-primary/30 mb-3">
+                        <Trophy className="w-3.5 h-3.5 text-primary" />
+                        <span className="text-xs font-medium text-primary">{selectedProject.badge}</span>
+                      </div>
+                    )}
+                    <h2 className="text-2xl font-bold text-foreground">{selectedProject.title}</h2>
                   </div>
                 </div>
 
-                {/* Corner decoration for featured */}
-                {project.featured && (
-                  <div className="absolute top-0 right-0 w-20 h-20 overflow-hidden">
-                    <div className="absolute top-0 right-0 w-full h-full bg-gradient-to-bl from-primary/20 to-transparent" />
-                    <Zap className="absolute top-3 right-3 w-4 h-4 text-primary" />
-                  </div>
-                )}
-              </motion.div>
-            );
-          })}
-        </motion.div>
-      </div>
+                <p className="text-muted-foreground">{selectedProject.description}</p>
+
+                <div className="flex flex-wrap gap-2">
+                  {selectedProject.tech_stack.map((tech) => (
+                    <span key={tech} className="tech-chip">{tech}</span>
+                  ))}
+                </div>
+
+                {/* Links */}
+                <div className="flex flex-wrap gap-3 pt-2">
+                  {selectedProject.live_url && (
+                    <a
+                      href={selectedProject.live_url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-primary text-primary-foreground text-sm font-medium hover:bg-primary/90 transition-colors"
+                    >
+                      <ExternalLink className="w-4 h-4" />
+                      Live Demo
+                    </a>
+                  )}
+                  {selectedProject.github_url && (
+                    <a
+                      href={selectedProject.github_url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-secondary text-secondary-foreground text-sm font-medium hover:bg-secondary/80 transition-colors"
+                    >
+                      <Github className="w-4 h-4" />
+                      Source Code
+                    </a>
+                  )}
+                  {selectedProject.linkedin_url && (
+                    <a
+                      href={selectedProject.linkedin_url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-secondary text-secondary-foreground text-sm font-medium hover:bg-secondary/80 transition-colors"
+                    >
+                      <Linkedin className="w-4 h-4" />
+                      LinkedIn Post
+                    </a>
+                  )}
+                </div>
+              </div>
+            </div>
+          )}
+        </DialogContent>
+      </Dialog>
     </section>
   );
 };

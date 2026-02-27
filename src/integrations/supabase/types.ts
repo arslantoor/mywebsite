@@ -53,6 +53,86 @@ export type Database = {
         }
         Relationships: []
       }
+      project_images: {
+        Row: {
+          created_at: string
+          display_order: number
+          id: string
+          image_url: string
+          project_id: string
+        }
+        Insert: {
+          created_at?: string
+          display_order?: number
+          id?: string
+          image_url: string
+          project_id: string
+        }
+        Update: {
+          created_at?: string
+          display_order?: number
+          id?: string
+          image_url?: string
+          project_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "project_images_project_id_fkey"
+            columns: ["project_id"]
+            isOneToOne: false
+            referencedRelation: "projects"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      projects: {
+        Row: {
+          badge: string | null
+          created_at: string
+          description: string
+          display_order: number
+          featured: boolean
+          github_url: string | null
+          id: string
+          linkedin_url: string | null
+          live_url: string | null
+          tech_stack: string[]
+          title: string
+          updated_at: string
+          video_url: string | null
+        }
+        Insert: {
+          badge?: string | null
+          created_at?: string
+          description: string
+          display_order?: number
+          featured?: boolean
+          github_url?: string | null
+          id?: string
+          linkedin_url?: string | null
+          live_url?: string | null
+          tech_stack?: string[]
+          title: string
+          updated_at?: string
+          video_url?: string | null
+        }
+        Update: {
+          badge?: string | null
+          created_at?: string
+          description?: string
+          display_order?: number
+          featured?: boolean
+          github_url?: string | null
+          id?: string
+          linkedin_url?: string | null
+          live_url?: string | null
+          tech_stack?: string[]
+          title?: string
+          updated_at?: string
+          video_url?: string | null
+        }
+        Relationships: []
+      }
       user_roles: {
         Row: {
           id: string
