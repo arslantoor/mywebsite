@@ -46,9 +46,14 @@ cd neural-command
 npm install
 
 # Step 4: Set up environment variables
-# Create a .env file with your Supabase credentials:
-# VITE_SUPABASE_URL=your_supabase_url
-# VITE_SUPABASE_PUBLISHABLE_KEY=your_supabase_key
+# Create a .env file with your Supabase credentials
+# See GET_SUPABASE_CREDENTIALS.md for detailed instructions
+# 
+# Copy .env.example to .env and fill in your values:
+# cp .env.example .env
+# 
+# Then edit .env with your Supabase credentials from:
+# https://app.supabase.com → Your Project → Settings → API
 
 # Step 5: Start the development server
 npm run dev
@@ -91,14 +96,22 @@ neural-command/
 
 ## Deployment
 
-This project can be deployed to any static hosting service:
+This project can be deployed to any static hosting service. **Your database, blogs, and projects are stored in Supabase and will persist after deployment.**
 
-- **Vercel**: Connect your GitHub repo and deploy
-- **Netlify**: Drag and drop the `dist` folder or connect via Git
-- **Cloudflare Pages**: Connect repository and deploy
-- **AWS S3 + CloudFront**: Upload build files to S3 bucket
+See [DEPLOYMENT.md](./DEPLOYMENT.md) for detailed deployment instructions.
 
-After building with `npm run build`, deploy the `dist` folder.
+### Quick Deploy
+
+1. **Set environment variables** on your deployment platform:
+   - `VITE_SUPABASE_URL` - Your Supabase project URL
+   - `VITE_SUPABASE_PUBLISHABLE_KEY` - Your Supabase anon key
+
+2. **Deploy to your preferred platform:**
+   - **Vercel**: Connect GitHub repo → Add env vars → Deploy
+   - **Netlify**: Connect GitHub repo → Add env vars → Deploy
+   - **Cloudflare Pages**: Connect GitHub repo → Add env vars → Deploy
+
+**Important:** Your Supabase database is separate from the deployment platform, so all your data (blogs, projects, images) will remain intact!
 
 ## License
 
