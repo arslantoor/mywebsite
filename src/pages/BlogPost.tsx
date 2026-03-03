@@ -2,6 +2,7 @@ import { motion } from 'framer-motion';
 import { useParams, Link } from 'react-router-dom';
 import { ArrowLeft, Calendar, Clock, Linkedin, Share2, Copy, Check } from 'lucide-react';
 import { useState } from 'react';
+import DOMPurify from 'dompurify';
 import { useBlogPost } from '@/hooks/useBlogPosts';
 import { NeuralBackground } from '@/components/NeuralBackground';
 import { Navigation } from '@/components/Navigation';
@@ -196,7 +197,7 @@ Read more on my blog →
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.3 }}
             className="prose prose-invert prose-lg max-w-none"
-            dangerouslySetInnerHTML={{ __html: post.content }}
+            dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(post.content) }}
           />
         </article>
       </main>
