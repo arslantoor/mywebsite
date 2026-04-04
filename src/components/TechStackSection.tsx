@@ -14,7 +14,6 @@ const categories = [
   {
     title: 'AI & Automation',
     icon: Brain,
-    color: 'from-cyan-500 to-blue-500',
     technologies: [
       'LangChain', 'LlamaIndex', 'OpenAI GPT-4', 'Claude', 
       'Hugging Face', 'PyTorch', 'TensorFlow', 'RAG Systems',
@@ -24,7 +23,6 @@ const categories = [
   {
     title: 'Backend',
     icon: Server,
-    color: 'from-purple-500 to-pink-500',
     technologies: [
       'Python', 'FastAPI', 'Node.js', 'TypeScript',
       'PostgreSQL', 'Redis', 'GraphQL', 'REST APIs',
@@ -34,7 +32,6 @@ const categories = [
   {
     title: 'Cloud',
     icon: Cloud,
-    color: 'from-green-500 to-emerald-500',
     technologies: [
       'AWS', 'GCP', 'Azure', 'Kubernetes',
       'Docker', 'Terraform', 'CI/CD', 'MLFlow',
@@ -44,7 +41,6 @@ const categories = [
   {
     title: 'Security',
     icon: Shield,
-    color: 'from-orange-500 to-red-500',
     technologies: [
       'OAuth 2.0', 'JWT', 'RBAC', 'Encryption',
       'API Security', 'Penetration Testing', 'OWASP',
