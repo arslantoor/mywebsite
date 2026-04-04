@@ -1,7 +1,8 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Send, Mail, User, MessageSquare, CheckCircle, Loader2, Zap } from 'lucide-react';
+import { Send, Mail, User, MessageSquare, CheckCircle, Loader2, Zap, AlertCircle } from 'lucide-react';
 import { z } from 'zod';
+import { supabase } from '@/integrations/supabase/client';
 
 const contactSchema = z.object({
   name: z.string().trim().min(1, "Name is required").max(100, "Name too long"),
@@ -20,6 +21,7 @@ export const ContactSection = () => {
   const [errors, setErrors] = useState<Partial<Record<keyof ContactFormData, string>>>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
+  const [submitError, setSubmitError] = useState<string | null>(null);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
@@ -33,6 +35,7 @@ export const ContactSection = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setErrors({});
+    setSubmitError(null);
 
     // Validate with zod
     const result = contactSchema.safeParse(formData);
@@ -49,15 +52,32 @@ export const ContactSection = () => {
 
     setIsSubmitting(true);
 
-    // Simulate submission (replace with actual email service later)
-    await new Promise((resolve) => setTimeout(resolve, 1500));
+    try {
+      // Call the edge function
+      const { data, error } = await supabase.functions.invoke('send-contact-email', {
+        body: {
+          name: formData.name,
+          email: formData.email,
+          message: formData.message,
+        },
+      });
 
-    setIsSubmitting(false);
-    setIsSuccess(true);
-    setFormData({ name: '', email: '', message: '' });
+      if (error) {
+        throw new Error(error.message || 'Failed to send message');
+      }
 
-    // Reset success state after 5 seconds
-    setTimeout(() => setIsSuccess(false), 5000);
+      setIsSuccess(true);
+      setFormData({ name: '', email: '', message: '' });
+
+      // Reset success state after 5 seconds
+      setTimeout(() => setIsSuccess(false), 5000);
+    } catch (error) {
+      const errorMessage = error instanceof Error ? error.message : 'Failed to send message. Please try again.';
+      setSubmitError(errorMessage);
+      console.error('Contact form error:', error);
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -102,6 +122,19 @@ export const ContactSection = () => {
             className="relative lg:mt-32"
           >
             <form onSubmit={handleSubmit} className="space-y-12">
+              {submitError && (
+                <motion.div
+                  initial={{ opacity: 0, scale: 0.95 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  className="p-6 rounded-[2.5rem] bg-red-500/10 border border-red-500/20 flex gap-4"
+                >
+                  <AlertCircle className="w-6 h-6 text-red-500 flex-shrink-0" />
+                  <div>
+                    <h3 className="text-lg font-bold text-red-500 mb-1">Error</h3>
+                    <p className="text-red-400">{submitError}</p>
+                  </div>
+                </motion.div>
+              )}
               {isSuccess ? (
                 <motion.div
                   initial={{ opacity: 0, scale: 0.95 }}
