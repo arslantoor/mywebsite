@@ -2,57 +2,55 @@
 @tailwind components;
 @tailwind utilities;
 
-/* 2026 Elegant Design System */
+/* 2026 Prism Spectrum Design System */
 
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap');
 
 @layer base {
   :root {
-    /* Refined dark theme — warm charcoal with soft violet accents */
-    --background: 230 15% 6%;
-    --foreground: 220 20% 92%;
+    --background: 250 25% 5%;
+    --foreground: 220 20% 93%;
 
-    --card: 230 12% 9%;
-    --card-foreground: 220 20% 92%;
+    --card: 250 18% 8%;
+    --card-foreground: 220 20% 93%;
 
-    --popover: 230 14% 8%;
-    --popover-foreground: 220 20% 92%;
+    --popover: 250 20% 7%;
+    --popover-foreground: 220 20% 93%;
 
-    /* Soft Indigo-Violet Primary */
-    --primary: 245 58% 64%;
+    /* Spectrum primary — electric blue-violet */
+    --primary: 250 75% 62%;
     --primary-foreground: 0 0% 100%;
 
-    --secondary: 230 12% 13%;
+    --secondary: 250 14% 13%;
     --secondary-foreground: 220 15% 85%;
 
-    --muted: 230 10% 16%;
-    --muted-foreground: 220 12% 52%;
+    --muted: 250 12% 16%;
+    --muted-foreground: 220 12% 50%;
 
-    --accent: 245 40% 55%;
+    --accent: 230 70% 58%;
     --accent-foreground: 0 0% 100%;
 
     --destructive: 0 62% 55%;
     --destructive-foreground: 0 0% 98%;
 
-    --border: 230 10% 14%;
-    --input: 230 10% 14%;
-    --ring: 245 58% 64%;
+    --border: 250 12% 14%;
+    --input: 250 12% 14%;
+    --ring: 250 75% 62%;
 
     --radius: 0.75rem;
 
-    /* Custom tokens */
-    --glow-cyan: 245 58% 64%;
-    --glow-purple: 280 50% 55%;
-    --surface-glass: 230 12% 10%;
+    --glow-cyan: 230 70% 58%;
+    --glow-purple: 270 65% 55%;
+    --surface-glass: 250 14% 10%;
 
-    --sidebar-background: 230 14% 7%;
-    --sidebar-foreground: 220 20% 92%;
-    --sidebar-primary: 245 58% 64%;
+    --sidebar-background: 250 20% 6%;
+    --sidebar-foreground: 220 20% 93%;
+    --sidebar-primary: 250 75% 62%;
     --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 230 12% 14%;
-    --sidebar-accent-foreground: 220 20% 92%;
-    --sidebar-border: 230 10% 14%;
-    --sidebar-ring: 245 58% 64%;
+    --sidebar-accent: 250 14% 14%;
+    --sidebar-accent-foreground: 220 20% 93%;
+    --sidebar-border: 250 12% 14%;
+    --sidebar-ring: 250 75% 62%;
   }
 }
 
@@ -99,13 +97,12 @@
 }
 
 @layer components {
-  /* Modern frosted glass card */
   .glass-card {
-    @apply bg-card/50 backdrop-blur-2xl border border-border/40 rounded-2xl;
+    @apply bg-card/40 backdrop-blur-2xl border border-border/30 rounded-2xl;
     box-shadow:
-      0 0 0 1px hsl(var(--border) / 0.15),
-      0 1px 2px 0 hsl(var(--background) / 0.4),
-      0 8px 24px -4px hsl(var(--background) / 0.3);
+      0 0 0 1px hsl(var(--border) / 0.1),
+      0 2px 4px 0 hsl(var(--background) / 0.3),
+      0 12px 32px -8px hsl(var(--background) / 0.4);
   }
 
   .glass-card-hover {
@@ -113,45 +110,42 @@
   }
 
   .glass-card-hover:hover {
-    @apply border-primary/25;
+    @apply border-primary/20;
     box-shadow:
-      0 0 0 1px hsl(var(--primary) / 0.1),
-      0 4px 16px -4px hsl(var(--primary) / 0.08),
-      0 16px 48px -12px hsl(var(--primary) / 0.12);
+      0 0 0 1px hsl(var(--primary) / 0.08),
+      0 8px 24px -8px hsl(var(--primary) / 0.1),
+      0 20px 60px -16px hsl(var(--primary) / 0.08);
     transform: translateY(-2px);
   }
 
-  /* Subtle glow effect */
   .glow-cyan {
     box-shadow:
-      0 0 30px hsl(var(--primary) / 0.12),
-      0 0 60px hsl(var(--primary) / 0.06);
+      0 0 30px hsl(var(--primary) / 0.1),
+      0 0 60px hsl(var(--primary) / 0.05);
   }
 
   .glow-text {
-    text-shadow: 0 0 40px hsl(var(--primary) / 0.25);
+    text-shadow: 0 0 50px hsl(var(--primary) / 0.2);
   }
 
-  /* Tech chip — refined */
   .tech-chip {
-    @apply px-3 py-1.5 text-xs font-mono font-medium rounded-lg bg-secondary/60 border border-border/30 text-muted-foreground transition-all duration-300;
+    @apply px-3 py-1.5 text-xs font-mono font-medium rounded-lg bg-secondary/50 border border-border/25 text-muted-foreground transition-all duration-300;
   }
 
   .tech-chip:hover {
-    @apply border-primary/30 text-primary bg-primary/[0.08];
+    @apply border-primary/25 text-primary bg-primary/10;
   }
 
-  /* Gradient text — soft elegant gradient */
+  /* Prism gradient text — violet → blue → emerald */
   .gradient-text {
     @apply bg-clip-text text-transparent;
-    background-image: linear-gradient(135deg, hsl(245 58% 72%), hsl(280 50% 65%), hsl(245 58% 64%));
+    background-image: linear-gradient(135deg, hsl(270 75% 65%), hsl(230 85% 62%), hsl(170 70% 50%));
   }
 
-  /* Subtle grid background */
   .neural-grid {
     background-image:
-      linear-gradient(hsl(var(--border) / 0.15) 1px, transparent 1px),
-      linear-gradient(90deg, hsl(var(--border) / 0.15) 1px, transparent 1px);
+      linear-gradient(hsl(var(--border) / 0.12) 1px, transparent 1px),
+      linear-gradient(90deg, hsl(var(--border) / 0.12) 1px, transparent 1px);
     background-size: 60px 60px;
   }
 
@@ -161,7 +155,6 @@
     }
   }
 
-  /* Animated border gradient — refined */
   .border-gradient {
     position: relative;
     background: hsl(var(--card));
@@ -173,7 +166,7 @@
     position: absolute;
     inset: -1px;
     border-radius: calc(var(--radius) + 1px);
-    background: linear-gradient(135deg, hsl(var(--primary) / 0.3), transparent 50%, hsl(var(--glow-purple) / 0.15));
+    background: linear-gradient(135deg, hsl(var(--primary) / 0.25), transparent 50%, hsl(170 70% 50% / 0.15));
     z-index: -1;
     opacity: 0;
     transition: opacity 0.5s ease;
@@ -187,7 +180,6 @@
     font-family: 'JetBrains Mono', monospace;
   }
 
-  /* Minimal scrollbar */
   ::-webkit-scrollbar {
     width: 6px;
     height: 6px;
