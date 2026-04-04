@@ -108,7 +108,7 @@ export const TechStackSection = () => {
             >
               {/* Category Header */}
               <div className="flex items-center gap-3 sm:gap-4 mb-4 sm:mb-6">
-                <div className={`p-2 sm:p-2.5 md:p-3 lg:p-4 rounded-xl bg-gradient-to-br ${category.color} bg-opacity-20`}>
+                <div className="p-2.5 sm:p-3 lg:p-4 rounded-xl bg-primary/10">
                   <category.icon className="w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6 lg:w-7 lg:h-7 text-foreground" />
                 </div>
                 <h3 className="text-base sm:text-lg md:text-xl lg:text-2xl xl:text-3xl font-semibold text-foreground">{category.title}</h3>
