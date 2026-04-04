@@ -61,31 +61,36 @@ export const ContactSection = () => {
   };
 
   return (
-    <section id="contact-form" className="py-12 sm:py-16 md:py-20 lg:py-24 xl:py-28 2xl:py-32 relative">
-      {/* Background accent */}
-      <div className="absolute inset-0 neural-grid opacity-10" />
-      <div className="absolute top-1/2 right-0 w-48 h-48 sm:w-64 sm:h-64 md:w-80 md:h-80 lg:w-96 lg:h-96 xl:w-[28rem] xl:h-[28rem] bg-primary/10 rounded-full blur-[80px] sm:blur-[100px] md:blur-[120px] lg:blur-[150px] -translate-y-1/2" />
-
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 xl:px-12 2xl:px-16 3xl:px-20 4xl:px-24 relative z-10">
-        <div className="max-w-2xl lg:max-w-3xl xl:max-w-4xl 2xl:max-w-5xl mx-auto">
+    <section id="contact" className="py-12 sm:py-16 md:py-20 lg:py-24 xl:py-28 2xl:py-32 relative overflow-hidden">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 xl:px-12 2xl:px-16 3xl:px-20 4xl:px-24">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 items-start">
           {/* Section Header */}
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
+            initial={{ opacity: 0, x: -20 }}
+            whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.5 }}
-            className="text-center mb-8 sm:mb-10 md:mb-12 lg:mb-16"
+            transition={{ duration: 0.8, ease: "easeOut" }}
+            className="text-left"
           >
-            <div className="inline-flex items-center gap-2 px-3 sm:px-4 py-1.5 sm:py-2 rounded-full glass-card mb-3 sm:mb-4">
+            <div className="inline-flex items-center gap-2 px-3 sm:px-4 py-1.5 sm:py-2 rounded-full glass-card mb-8">
               <Zap className="w-3 h-3 sm:w-4 sm:h-4 lg:w-5 lg:h-5 text-primary" />
-              <span className="text-xs sm:text-sm lg:text-base font-mono text-muted-foreground">Quick Contact</span>
+              <span className="text-xs sm:text-sm lg:text-base font-mono text-muted-foreground uppercase tracking-[0.2em]">Contact</span>
             </div>
-            <h2 className="text-3xl xs:text-4xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl 2xl:text-8xl 3xl:text-9xl font-bold mb-3 sm:mb-4 lg:mb-6">
-              <span className="gradient-text">Get in Touch</span>
+            <h2 className="text-5xl xs:text-6xl sm:text-7xl md:text-8xl lg:text-9xl xl:text-[10rem] 2xl:text-[12rem] font-bold mb-8 leading-[0.85] tracking-[-0.05em] text-foreground">
+              Say Hello.
             </h2>
-            <p className="text-sm sm:text-base lg:text-lg xl:text-xl 2xl:text-2xl text-muted-foreground px-4">
-              Have a project in mind? Let's discuss how AI can transform your business.
+            <p className="text-sm sm:text-lg md:text-xl lg:text-2xl text-muted-foreground max-w-xl leading-relaxed">
+              Whether you have a breakthrough idea or just want to discuss the future of AI engineering, my inbox is always open.
             </p>
+            
+            <div className="mt-12 space-y-6">
+               <div className="flex items-center gap-4 group cursor-pointer">
+                  <div className="w-12 h-12 rounded-full bg-zinc-900 border border-white/5 flex items-center justify-center group-hover:border-primary/40 transition-all">
+                     <Mail className="w-5 h-5 text-muted-foreground group-hover:text-primary transition-colors" />
+                  </div>
+                  <span className="text-lg font-medium text-foreground group-hover:text-primary transition-colors">arslan@neuralcommand.ai</span>
+               </div>
+            </div>
           </motion.div>
 
           {/* Contact Form */}
@@ -93,116 +98,101 @@ export const ContactSection = () => {
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: 0.1 }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+            className="relative lg:mt-32"
           >
-            <form onSubmit={handleSubmit} className="glass-card p-4 sm:p-6 md:p-8 lg:p-10 xl:p-12 space-y-4 sm:space-y-5 md:space-y-6">
+            <form onSubmit={handleSubmit} className="space-y-12">
               {isSuccess ? (
                 <motion.div
                   initial={{ opacity: 0, scale: 0.95 }}
                   animate={{ opacity: 1, scale: 1 }}
-                  className="flex flex-col items-center justify-center py-12 text-center"
+                  className="p-12 rounded-[2.5rem] bg-zinc-900 border border-white/5 text-center"
                 >
-                  <div className="w-16 h-16 rounded-full bg-green-500/20 flex items-center justify-center mb-4">
-                    <CheckCircle className="w-8 h-8 text-green-500" />
+                  <div className="w-20 h-20 rounded-full bg-green-500/10 flex items-center justify-center mb-6 mx-auto">
+                    <CheckCircle className="w-10 h-10 text-green-500" />
                   </div>
-                  <h3 className="text-xl font-semibold text-foreground mb-2">Message Sent!</h3>
-                  <p className="text-muted-foreground">
-                    Thanks for reaching out. I'll get back to you within 24 hours.
+                  <h3 className="text-3xl font-bold text-white mb-4">Message Sent.</h3>
+                  <p className="text-muted-foreground text-lg">
+                    Expect a response within 24 hours.
                   </p>
                 </motion.div>
               ) : (
                 <>
-                  {/* Name Field */}
-                  <div className="space-y-2">
-                    <label htmlFor="name" className="text-sm font-medium text-foreground flex items-center gap-2">
-                      <User className="w-4 h-4 text-primary" />
-                      Name
-                    </label>
-                    <input
-                      type="text"
-                      id="name"
-                      name="name"
-                      value={formData.name}
-                      onChange={handleChange}
-                      placeholder="Your name"
-                      className={`w-full bg-secondary/50 border ${
-                        errors.name ? 'border-destructive' : 'border-border/50'
-                      } rounded-lg px-4 py-3 text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary/50 transition-all`}
-                    />
-                    {errors.name && (
-                      <p className="text-xs text-destructive">{errors.name}</p>
-                    )}
+                  <div className="space-y-10">
+                    {/* Name */}
+                    <div className="relative group">
+                      <input
+                        type="text"
+                        name="name"
+                        value={formData.name}
+                        onChange={handleChange}
+                        placeholder="Name"
+                        className="w-full bg-transparent border-b border-white/10 py-4 text-xl sm:text-2xl text-foreground placeholder:text-zinc-700 focus:outline-none focus:border-primary transition-colors peer"
+                      />
+                      <div className="absolute bottom-0 left-0 w-0 h-[1px] bg-primary transition-all duration-500 peer-focus:w-full" />
+                      {errors.name && (
+                        <p className="absolute -bottom-6 left-0 text-[10px] uppercase tracking-widest font-bold text-destructive">{errors.name}</p>
+                      )}
+                    </div>
+
+                    {/* Email */}
+                    <div className="relative group">
+                      <input
+                        type="email"
+                        name="email"
+                        value={formData.email}
+                        onChange={handleChange}
+                        placeholder="Email Address"
+                        className="w-full bg-transparent border-b border-white/10 py-4 text-xl sm:text-2xl text-foreground placeholder:text-zinc-700 focus:outline-none focus:border-primary transition-colors peer"
+                      />
+                      <div className="absolute bottom-0 left-0 w-0 h-[1px] bg-primary transition-all duration-500 peer-focus:w-full" />
+                      {errors.email && (
+                        <p className="absolute -bottom-6 left-0 text-[10px] uppercase tracking-widest font-bold text-destructive">{errors.email}</p>
+                      )}
+                    </div>
+
+                    {/* Message */}
+                    <div className="relative group">
+                      <textarea
+                        name="message"
+                        value={formData.message}
+                        onChange={handleChange}
+                        placeholder="Your Message"
+                        rows={1}
+                        className="w-full bg-transparent border-b border-white/10 py-4 text-xl sm:text-2xl text-foreground placeholder:text-zinc-700 focus:outline-none focus:border-primary transition-colors peer resize-none overflow-hidden"
+                        onInput={(e) => {
+                           const target = e.target as HTMLTextAreaElement;
+                           target.style.height = 'auto';
+                           target.style.height = `${target.scrollHeight}px`;
+                        }}
+                      />
+                      <div className="absolute bottom-0 left-0 w-0 h-[1px] bg-primary transition-all duration-500 peer-focus:w-full" />
+                      {errors.message && (
+                        <p className="absolute -bottom-6 left-0 text-[10px] uppercase tracking-widest font-bold text-destructive">{errors.message}</p>
+                      )}
+                    </div>
                   </div>
 
-                  {/* Email Field */}
-                  <div className="space-y-2">
-                    <label htmlFor="email" className="text-sm font-medium text-foreground flex items-center gap-2">
-                      <Mail className="w-4 h-4 text-primary" />
-                      Email
-                    </label>
-                    <input
-                      type="email"
-                      id="email"
-                      name="email"
-                      value={formData.email}
-                      onChange={handleChange}
-                      placeholder="you@example.com"
-                      className={`w-full bg-secondary/50 border ${
-                        errors.email ? 'border-destructive' : 'border-border/50'
-                      } rounded-lg px-4 py-3 text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary/50 transition-all`}
-                    />
-                    {errors.email && (
-                      <p className="text-xs text-destructive">{errors.email}</p>
-                    )}
-                  </div>
-
-                  {/* Message Field */}
-                  <div className="space-y-2">
-                    <label htmlFor="message" className="text-sm font-medium text-foreground flex items-center gap-2">
-                      <MessageSquare className="w-4 h-4 text-primary" />
-                      Message
-                    </label>
-                    <textarea
-                      id="message"
-                      name="message"
-                      value={formData.message}
-                      onChange={handleChange}
-                      placeholder="Tell me about your project or idea..."
-                      rows={5}
-                      className={`w-full bg-secondary/50 border ${
-                        errors.message ? 'border-destructive' : 'border-border/50'
-                      } rounded-lg px-4 py-3 text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary/50 transition-all resize-none`}
-                    />
-                    {errors.message && (
-                      <p className="text-xs text-destructive">{errors.message}</p>
-                    )}
-                    <p className="text-xs text-muted-foreground text-right">
-                      {formData.message.length}/1000
-                    </p>
-                  </div>
-
-                  {/* Submit Button */}
                   <button
                     type="submit"
                     disabled={isSubmitting}
-                    className="w-full flex items-center justify-center gap-2 px-6 py-3.5 rounded-lg bg-primary text-primary-foreground font-medium hover:bg-primary/90 disabled:opacity-50 disabled:cursor-not-allowed transition-all hover:shadow-lg hover:shadow-primary/25"
+                    className="group relative w-full overflow-hidden rounded-full bg-white px-8 py-6 text-black font-bold uppercase tracking-[0.2em] text-xs transition-all hover:scale-[1.02] active:scale-[0.98] disabled:opacity-50"
                   >
-                    {isSubmitting ? (
-                      <>
-                        <Loader2 className="w-5 h-5 animate-spin" />
-                        Sending...
-                      </>
-                    ) : (
-                      <>
-                        <Send className="w-5 h-5" />
-                        Send Message
-                      </>
-                    )}
+                    <div className="absolute inset-0 bg-primary opacity-0 group-hover:opacity-10 transition-opacity" />
+                    <div className="relative flex items-center justify-center gap-3">
+                      {isSubmitting ? (
+                        <>
+                          <Loader2 className="w-4 h-4 animate-spin text-black" />
+                          <span>Processing...</span>
+                        </>
+                      ) : (
+                        <>
+                          <span>Send Message</span>
+                          <Send className="w-4 h-4 transition-transform group-hover:translate-x-1 group-hover:-translate-y-1" />
+                        </>
+                      )}
+                    </div>
                   </button>
-
-                  <p className="text-xs text-center text-muted-foreground">
-                    I typically respond within 24 hours.
-                  </p>
                 </>
               )}
             </form>

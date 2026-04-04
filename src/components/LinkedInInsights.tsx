@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { Linkedin, Heart, MessageCircle, Repeat2, Send, MoreHorizontal } from 'lucide-react';
+import { Linkedin, Heart, MessageCircle, Repeat2, Send, MoreHorizontal, Share2 } from 'lucide-react';
 
 const insights = [
   {
@@ -97,8 +97,9 @@ export const LinkedInInsights = () => {
             <Linkedin className="w-4 h-4 text-[#0077B5]" />
             <span className="text-sm font-mono text-muted-foreground">Recent Insights</span>
           </div>
-          <h2 className="text-4xl md:text-5xl font-bold mb-4">
-            <span className="gradient-text">LinkedIn Feed</span>
+          <h2 className="text-2xl font-bold text-foreground flex items-center justify-center gap-2 mb-4">
+            <Share2 className="w-6 h-6 text-primary" />
+            <span>LinkedIn Feed</span>
           </h2>
           <p className="text-muted-foreground max-w-2xl mx-auto">
             Thoughts on AI engineering, industry trends, and lessons learned from building production systems.

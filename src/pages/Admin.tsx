@@ -173,7 +173,7 @@ const Admin = () => {
             <TabsContent value="blog">
               {/* Blog Actions */}
               <div className="flex items-center justify-between mb-8">
-                <h2 className="text-2xl font-bold gradient-text">Manage Posts</h2>
+                <h2 className="text-2xl font-bold text-foreground">Manage Posts</h2>
                 <Button onClick={handleNew} className="bg-primary hover:bg-primary/90">
                   <Plus className="w-4 h-4 mr-2" />
                   New Post

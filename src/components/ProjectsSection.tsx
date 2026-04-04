@@ -33,40 +33,38 @@ export const ProjectsSection = () => {
   const getProjectImages = (projectId: string) =>
     allImages.filter((img) => img.project_id === projectId);
 
-  const getSizeClass = (index: number, total: number) => {
-    if (total <= 2) return 'md:col-span-2 md:row-span-2';
-    if (index < 2) return 'md:col-span-2 md:row-span-2';
-    if (index < 4) return 'md:col-span-2 lg:col-span-1 md:row-span-1';
-    return 'md:col-span-1 md:row-span-1';
-  };
-
-  const isLarge = (index: number, total: number) => {
-    if (total <= 2) return true;
-    return index < 2;
+  const getBentoClass = (index: number) => {
+    // Desktop (12 cols) / Tablet (6 cols) / Mobile (1 col)
+    if (index === 0) return 'col-span-12 md:col-span-8 row-span-2 aspect-[16/10] md:aspect-auto';
+    if (index === 1) return 'col-span-12 md:col-span-4 row-span-1 aspect-square md:aspect-auto';
+    if (index === 2) return 'col-span-12 md:col-span-4 row-span-1 aspect-square md:aspect-auto';
+    if (index === 3) return 'col-span-12 md:col-span-6 row-span-1 aspect-video md:aspect-auto';
+    if (index === 4) return 'col-span-12 md:col-span-6 row-span-1 aspect-video md:aspect-auto';
+    return 'col-span-12 md:col-span-4 aspect-square';
   };
 
   const projectImages = selectedProject ? getProjectImages(selectedProject.id) : [];
 
   return (
-    <section id="projects" className="py-12 sm:py-16 md:py-20 lg:py-24 xl:py-28 2xl:py-32 relative">
+    <section id="projects" className="py-12 sm:py-16 md:py-20 lg:py-24 xl:py-28 2xl:py-32 relative overflow-hidden">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 xl:px-12 2xl:px-16 3xl:px-20 4xl:px-24">
         {/* Section Header */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.5 }}
-          className="text-center mb-8 sm:mb-12 md:mb-16 lg:mb-20"
+          transition={{ duration: 0.8, ease: "easeOut" }}
+          className="text-left mb-12 sm:mb-16 md:mb-20 lg:mb-24"
         >
-          <div className="inline-flex items-center gap-2 px-3 sm:px-4 py-1.5 sm:py-2 rounded-full glass-card mb-3 sm:mb-4">
+          <div className="inline-flex items-center gap-2 px-3 sm:px-4 py-1.5 sm:py-2 rounded-full glass-card mb-6">
             <Cpu className="w-3 h-3 sm:w-4 sm:h-4 lg:w-5 lg:h-5 text-primary" />
-            <span className="text-xs sm:text-sm lg:text-base font-mono text-muted-foreground">Featured Work</span>
+            <span className="text-xs sm:text-sm lg:text-base font-mono text-muted-foreground uppercase tracking-[0.2em]">The Portfolio</span>
           </div>
-          <h2 className="text-3xl xs:text-4xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl 2xl:text-8xl 3xl:text-9xl font-bold mb-3 sm:mb-4 lg:mb-6">
-            <span className="gradient-text">Projects</span>
+          <h2 className="text-4xl xs:text-5xl sm:text-7xl md:text-8xl lg:text-9xl xl:text-[10rem] 2xl:text-[12rem] font-bold mb-8 leading-[0.9] tracking-tighter text-foreground">
+            Engineering<br />Outcomes.
           </h2>
-          <p className="text-sm sm:text-base lg:text-lg xl:text-xl 2xl:text-2xl text-muted-foreground max-w-2xl lg:max-w-3xl xl:max-w-4xl mx-auto px-4">
-            A showcase of AI systems, agentic workflows, and neural frameworks built to solve real-world challenges.
+          <p className="text-sm sm:text-lg md:text-xl lg:text-2xl text-muted-foreground max-w-3xl leading-relaxed">
+            Every line of code is a design decision. A curated collection of AI systems and neural frameworks built for scale.
           </p>
         </motion.div>
 
@@ -75,10 +73,10 @@ export const ProjectsSection = () => {
             <Loader2 className="w-8 h-8 animate-spin text-primary" />
           </div>
         ) : projects.length === 0 ? (
-          <div className="text-center py-16 glass-card">
-            <Cpu className="w-16 h-16 text-muted-foreground mx-auto mb-4" />
-            <h3 className="text-xl font-semibold mb-2">No projects yet</h3>
-            <p className="text-muted-foreground">Projects will appear here once added via admin panel.</p>
+          <div className="text-center py-20 glass-card rounded-[2rem]">
+            <Cpu className="w-16 h-16 text-muted-foreground/20 mx-auto mb-6" />
+            <h3 className="text-2xl font-bold mb-4">No projects yet</h3>
+            <p className="text-muted-foreground">The lab is currently empty. Check back soon.</p>
           </div>
         ) : (
           <motion.div
@@ -86,11 +84,11 @@ export const ProjectsSection = () => {
             initial="hidden"
             whileInView="show"
             viewport={{ once: true }}
-            className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-4 3xl:grid-cols-5 4xl:grid-cols-6 gap-3 sm:gap-4 lg:gap-6 xl:gap-8 auto-rows-[180px] sm:auto-rows-[200px] lg:auto-rows-[240px] xl:auto-rows-[280px] 2xl:auto-rows-[320px]"
+            className="grid grid-cols-12 gap-4 lg:gap-6 xl:gap-8 auto-rows-[280px] lg:auto-rows-[320px] xl:auto-rows-[380px]"
           >
             {projects.map((project, index) => {
               const images = getProjectImages(project.id);
-              const coverImage = images[0]?.image_url;
+              const coverImage = images[0]?.image_url || 'https://images.unsplash.com/photo-1677442136019-21780ecad995?auto=format&fit=crop&q=80&w=2560';
 
               return (
                 <motion.div
@@ -100,92 +98,49 @@ export const ProjectsSection = () => {
                     setSelectedProject(project);
                     setCurrentImageIndex(0);
                   }}
-                  className={`group relative glass-card-hover p-4 sm:p-5 md:p-6 lg:p-8 flex flex-col justify-between overflow-hidden cursor-pointer ${getSizeClass(index, projects.length)}`}
+                  className={`group relative rounded-[2rem] overflow-hidden cursor-pointer bg-zinc-900 shadow-2xl transition-all duration-700 hover:shadow-primary/5 ${getBentoClass(index)}`}
                 >
-                  {/* Cover image background */}
-                  {coverImage && (
-                    <div
-                      className="absolute inset-0 bg-cover bg-center opacity-20 group-hover:opacity-30 transition-opacity duration-500"
-                      style={{ backgroundImage: `url(${coverImage})` }}
-                    />
-                  )}
+                  {/* Full-bleed background */}
+                  <div
+                    className="absolute inset-0 bg-cover bg-center origin-center transition-transform duration-1000 group-hover:scale-105"
+                    style={{ backgroundImage: `url(${coverImage})` }}
+                  />
+                  
+                  {/* Gradient Scrim */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent group-hover:via-black/20 transition-all duration-500" />
+                  
+                  {/* Content Overlay */}
+                  <div className="absolute inset-x-0 bottom-0 p-6 lg:p-10 flex flex-col justify-end h-full">
+                    <div className="translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
+                      {project.badge && (
+                        <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-primary/20 border border-primary/30 mb-4 backdrop-blur-md">
+                          <Trophy className="w-3.5 h-3.5 text-primary" />
+                          <span className="text-xs font-bold uppercase tracking-wider text-primary">{project.badge}</span>
+                        </div>
+                      )}
 
-                  <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                      <h3 className="text-xl sm:text-2xl lg:text-3xl xl:text-4xl font-bold text-white mb-2 leading-tight">
+                        {project.title}
+                      </h3>
 
-                  <div className="relative z-10">
-                    {project.badge && (
-                      <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-primary/20 border border-primary/30 mb-4">
-                        <Trophy className="w-3.5 h-3.5 text-primary" />
-                        <span className="text-xs font-medium text-primary">{project.badge}</span>
-                      </div>
-                    )}
-
-                    <h3 className="text-base sm:text-lg md:text-xl lg:text-2xl xl:text-3xl font-semibold text-foreground mb-2 group-hover:text-primary transition-colors">
-                      {project.title}
-                    </h3>
-
-                    {isLarge(index, projects.length) && (
-                      <p className="text-sm text-muted-foreground line-clamp-3">
+                      <p className="text-sm sm:text-base text-white/60 line-clamp-2 max-w-lg mb-6 opacity-0 group-hover:opacity-100 transition-opacity duration-500 delay-100">
                         {project.description}
                       </p>
-                    )}
-                  </div>
 
-                  <div className="relative z-10">
-                    <div className="flex flex-wrap gap-2 mb-4">
-                      {project.tech_stack.slice(0, isLarge(index, projects.length) ? 4 : 2).map((tech) => (
-                        <span key={tech} className="tech-chip">{tech}</span>
-                      ))}
-                    </div>
-
-                    <div className="flex items-center gap-3 opacity-0 group-hover:opacity-100 transition-opacity">
-                      {project.github_url && (
-                        <a
-                          href={project.github_url}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          onClick={(e) => e.stopPropagation()}
-                          className="p-2 rounded-lg bg-secondary hover:bg-primary/20 text-muted-foreground hover:text-primary transition-colors"
-                        >
-                          <Github className="w-4 h-4" />
-                        </a>
-                      )}
-                      {project.live_url && (
-                        <a
-                          href={project.live_url}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          onClick={(e) => e.stopPropagation()}
-                          className="p-2 rounded-lg bg-secondary hover:bg-primary/20 text-muted-foreground hover:text-primary transition-colors"
-                        >
-                          <ExternalLink className="w-4 h-4" />
-                        </a>
-                      )}
-                      {project.linkedin_url && (
-                        <a
-                          href={project.linkedin_url}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          onClick={(e) => e.stopPropagation()}
-                          className="p-2 rounded-lg bg-secondary hover:bg-primary/20 text-muted-foreground hover:text-primary transition-colors"
-                        >
-                          <Linkedin className="w-4 h-4" />
-                        </a>
-                      )}
-                      {project.video_url && (
-                        <span className="p-2 rounded-lg bg-secondary text-muted-foreground">
-                          <Play className="w-4 h-4" />
-                        </span>
-                      )}
+                      <div className="flex flex-wrap gap-2 opacity-0 group-hover:opacity-100 transition-opacity duration-500 delay-150">
+                        {project.tech_stack.slice(0, 3).map((tech) => (
+                          <span key={tech} className="px-3 py-1 rounded-md bg-white/10 border border-white/10 text-[10px] uppercase tracking-widest font-bold text-white backdrop-blur-md">
+                            {tech}
+                          </span>
+                        ))}
+                      </div>
                     </div>
                   </div>
 
-                  {project.featured && (
-                    <div className="absolute top-0 right-0 w-20 h-20 overflow-hidden">
-                      <div className="absolute top-0 right-0 w-full h-full bg-gradient-to-bl from-primary/20 to-transparent" />
-                      <Zap className="absolute top-3 right-3 w-4 h-4 text-primary" />
-                    </div>
-                  )}
+                  {/* Corner Accent */}
+                  <div className="absolute top-6 right-6 p-3 rounded-full bg-black/20 border border-white/10 backdrop-blur-xl opacity-0 group-hover:opacity-100 transition-all duration-500 -translate-y-2 group-hover:translate-y-0 shadow-lg">
+                    <ExternalLink className="w-5 h-5 text-white" />
+                  </div>
                 </motion.div>
               );
             })}

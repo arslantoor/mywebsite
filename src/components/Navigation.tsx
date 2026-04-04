@@ -1,12 +1,16 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Menu, X, Terminal } from 'lucide-react';
+import { ThemeSwitcher } from './ThemeSwitcher';
 
 const navItems = [
-  { label: 'Home', href: '#hero' },
-  { label: 'Projects', href: '#projects' },
-  { label: 'Stack', href: '#stack' },
-  { label: 'Blog', href: '#blog' },
+  { label: 'Overview', href: '#hero' },
+  { label: 'The Vision', href: '#intro' },
+  { label: 'The Lineup', href: '#projects' },
+  { label: 'Capabilities', href: '#stack' },
+  { label: 'Affiliations', href: '#community' },
+  { label: 'Neural Log', href: '#blog' },
+  { label: 'Connect', href: '#contact' },
 ];
 
 export const Navigation = () => {
@@ -55,8 +59,9 @@ export const Navigation = () => {
             ))}
           </div>
 
-          {/* CTA Button */}
-          <div className="hidden md:block">
+          {/* CTA Button and Theme Switcher */}
+          <div className="hidden md:flex items-center gap-4">
+            <ThemeSwitcher />
             <a
               href="#contact"
               className="px-5 py-2 rounded-xl bg-primary/10 border border-primary/20 text-primary text-sm font-medium hover:bg-primary/15 transition-all duration-300"
@@ -66,12 +71,15 @@ export const Navigation = () => {
           </div>
 
           {/* Mobile Menu Button */}
-          <button
-            onClick={() => setIsMobileOpen(!isMobileOpen)}
-            className="md:hidden p-2 text-muted-foreground hover:text-foreground transition-colors"
-          >
-            {isMobileOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
-          </button>
+          <div className="md:hidden flex items-center gap-2">
+            <ThemeSwitcher />
+            <button
+              onClick={() => setIsMobileOpen(!isMobileOpen)}
+              className="p-2 text-muted-foreground hover:text-foreground transition-colors"
+            >
+              {isMobileOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+            </button>
+          </div>
         </div>
 
         {/* Mobile Menu */}

@@ -2,26 +2,30 @@ import { Terminal, Github, Linkedin, Twitter, Mail } from 'lucide-react';
 
 export const Footer = () => {
   return (
-    <footer id="contact" className="py-8 sm:py-12 md:py-16 lg:py-20 xl:py-24 border-t border-border/50">
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 xl:px-12 2xl:px-16 3xl:px-20 4xl:px-24">
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 sm:gap-8 md:gap-10 lg:gap-12">
-          {/* Brand */}
-          <div className="sm:col-span-2 md:col-span-2">
-            <a href="#hero" className="flex items-center gap-1.5 sm:gap-2 mb-3 sm:mb-4">
-              <div className="w-8 h-8 sm:w-10 sm:h-10 lg:w-12 lg:h-12 rounded-lg bg-primary/20 flex items-center justify-center">
-                <Terminal className="w-4 h-4 sm:w-5 sm:h-5 lg:w-6 lg:h-6 text-primary" />
+    <footer id="contact" className="relative py-16 sm:py-24 border-t border-primary/10 overflow-hidden bg-background">
+      {/* Subtle background glow */}
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-[1px] bg-gradient-to-r from-transparent via-primary/50 to-transparent" />
+      
+      <div className="container mx-auto px-6 lg:px-12 xl:px-20 max-w-7xl">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-8">
+          {/* Brand & Mission */}
+          <div className="lg:col-span-1">
+            <a href="#hero" className="flex items-center gap-2 mb-6 group">
+              <div className="w-10 h-10 rounded-lg bg-primary/15 border border-primary/20 flex items-center justify-center group-hover:border-primary/40 transition-colors">
+                <Terminal className="w-5 h-5 text-primary" />
               </div>
-              <span className="font-mono text-xs sm:text-sm lg:text-base xl:text-lg font-semibold text-foreground">
+              <span className="font-mono text-xl font-bold tracking-tight text-foreground">
                 arslan<span className="text-primary">.ai</span>
               </span>
             </a>
-            <p className="text-muted-foreground text-xs sm:text-sm md:text-base lg:text-lg max-w-sm mb-4 sm:mb-6">
-              Senior AI Engineer specializing in Agentic Workflows, Neural Frameworks, and production-grade ML systems.
+            <p className="text-muted-foreground text-sm leading-relaxed mb-8">
+              Engineering the future of autonomous systems and neural decision frameworks. 
+              6+ years of building production AI that scales from prototype to global infrastructure.
             </p>
-            <div className="flex items-center gap-2 sm:gap-3">
+            <div className="flex items-center gap-3">
               {[
-                { icon: Github, href: '#', label: 'GitHub' },
-                { icon: Linkedin, href: '#', label: 'LinkedIn' },
+                { icon: Github, href: 'https://github.com/arslantoor', label: 'GitHub' },
+                { icon: Linkedin, href: 'https://linkedin.com/in/arslantoor', label: 'LinkedIn' },
                 { icon: Twitter, href: '#', label: 'Twitter' },
                 { icon: Mail, href: 'mailto:hello@arslan.ai', label: 'Email' },
               ].map(({ icon: Icon, href, label }) => (
@@ -29,55 +33,69 @@ export const Footer = () => {
                   key={label}
                   href={href}
                   aria-label={label}
-                  className="p-2 sm:p-2.5 lg:p-3 rounded-lg bg-secondary text-muted-foreground hover:text-primary hover:bg-primary/10 transition-colors"
+                  className="w-10 h-10 rounded-full bg-secondary/50 border border-border/50 flex items-center justify-center text-muted-foreground hover:text-primary hover:border-primary/50 hover:bg-primary/5 transition-all duration-300"
                 >
-                  <Icon className="w-3.5 h-3.5 sm:w-4 sm:h-4 lg:w-5 lg:h-5" />
+                  <Icon className="w-4 h-4" />
                 </a>
               ))}
             </div>
           </div>
 
-          {/* Quick Links */}
+          {/* Services */}
           <div>
-            <h4 className="font-semibold text-foreground mb-3 sm:mb-4 text-sm sm:text-base lg:text-lg xl:text-xl">Quick Links</h4>
-            <ul className="space-y-1.5 sm:space-y-2">
-              {['Projects', 'Tech Stack', 'Blog'].map((link) => (
-                <li key={link}>
-                  <a
-                    href={`#${link.toLowerCase().replace(' ', '')}`}
-                    className="text-xs sm:text-sm md:text-base lg:text-lg text-muted-foreground hover:text-primary transition-colors"
-                  >
-                    {link}
-                  </a>
+            <h4 className="text-foreground font-semibold mb-6 text-sm tracking-wide uppercase opacity-75">Services</h4>
+            <ul className="space-y-3">
+              {[
+                'AI System Architecture',
+                'MLOps & Infrastructure',
+                'Technical Consulting',
+                'Agent Framework Design',
+                'Custom Neural Solutions',
+              ].map((service) => (
+                <li key={service} className="text-xs text-muted-foreground hover:text-primary transition-colors cursor-default">
+                  {service}
                 </li>
               ))}
             </ul>
           </div>
 
-          {/* Contact */}
+          {/* Consultation */}
           <div>
-            <h4 className="font-semibold text-foreground mb-3 sm:mb-4 text-sm sm:text-base lg:text-lg xl:text-xl">Get in Touch</h4>
-            <ul className="space-y-1.5 sm:space-y-2 text-xs sm:text-sm md:text-base lg:text-lg text-muted-foreground">
-              <li>Open for consulting</li>
-              <li>Speaking engagements</li>
-              <li>AI/ML advisory</li>
-            </ul>
-            <a
-              href="mailto:hello@arslan.ai"
-              className="inline-block mt-3 sm:mt-4 px-3 sm:px-4 lg:px-5 py-1.5 sm:py-2 lg:py-2.5 rounded-lg bg-primary/10 border border-primary/30 text-primary text-xs sm:text-sm md:text-base font-medium hover:bg-primary/20 transition-colors"
-            >
-              Contact Me
-            </a>
+            <h4 className="text-foreground font-semibold mb-6 text-sm tracking-wide uppercase opacity-75">Get in Touch</h4>
+            <div className="space-y-3">
+              <p className="text-xs text-muted-foreground leading-relaxed">
+                Open for consulting engagements, technical partnerships, and strategic AI initiatives.
+              </p>
+              <div className="space-y-2">
+                <p className="text-xs font-mono text-primary">hello@arslan.ai</p>
+                <p className="text-xs text-muted-foreground">Berlin, Germany / Remote</p>
+              </div>
+              <a
+                href="mailto:hello@arslan.ai?subject=Consultation%20Request"
+                className="inline-block mt-4 px-4 py-2 rounded-lg bg-primary/10 border border-primary/30 text-primary text-xs font-medium hover:bg-primary/20 hover:border-primary/50 transition-all duration-300"
+              >
+                Request Consultation
+              </a>
+            </div>
           </div>
         </div>
 
-        {/* Bottom */}
-        <div className="mt-8 sm:mt-10 md:mt-12 lg:mt-16 pt-4 sm:pt-5 md:pt-6 border-t border-border/50 flex flex-col md:flex-row items-center justify-between gap-3 sm:gap-4">
-          <p className="text-xs sm:text-sm md:text-base text-muted-foreground text-center md:text-left">
-            © 2026 Muhammad Arslan Toor. All rights reserved.
-          </p>
-          <p className="text-xs sm:text-sm md:text-base text-muted-foreground font-mono text-center md:text-right">
-            Built with <span className="text-primary">React</span> + <span className="text-primary">Framer Motion</span>
+        {/* Legal & Tech Stack */}
+        <div className="mt-16 sm:mt-24 pt-8 border-t border-primary/5 flex flex-col md:flex-row items-center justify-between gap-6">
+          <div className="flex flex-col md:flex-row items-center gap-2 md:gap-8">
+            <p className="text-xs text-muted-foreground font-mono">
+              © 2026 Muhammad Arslan Toor
+            </p>
+            <div className="flex items-center gap-4 text-[10px] uppercase tracking-widest text-muted-foreground/30 font-mono">
+              <span>GDPR Compliant</span>
+              <span>•</span>
+              <span>Encrypted Data</span>
+            </div>
+          </div>
+          <p className="text-xs text-muted-foreground font-mono flex items-center gap-2">
+            Engineered with <span className="text-primary italic animate-pulse">Neural Logic</span> 
+            <span className="opacity-30">|</span> 
+            <span>React + Three.js</span>
           </p>
         </div>
       </div>

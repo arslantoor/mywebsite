@@ -111,7 +111,7 @@ export const ProjectManagement = () => {
   return (
     <div>
       <div className="flex items-center justify-between mb-8">
-        <h2 className="text-2xl font-bold gradient-text">Manage Projects</h2>
+        <h2 className="text-2xl font-bold text-foreground">Manage Projects</h2>
         <Button onClick={handleNew} className="bg-primary hover:bg-primary/90">
           <Plus className="w-4 h-4 mr-2" />
           New Project

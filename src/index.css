@@ -2,61 +2,119 @@
 @tailwind components;
 @tailwind utilities;
 
-/* 2026 Prism Spectrum Design System */
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap');
 
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap');
+/* Architectural Tech: Deep Charcoal & Muted Gold Design System */
 
 @layer base {
   :root {
-    --background: 250 25% 5%;
-    --foreground: 220 20% 93%;
+    /* Perfect Dark: Pure Black & Electric Cyan (Synthesized QT Capital Style) */
+    --background: 0 0% 0%;
+    --foreground: 0 0% 98%;
 
-    --card: 250 18% 8%;
-    --card-foreground: 220 20% 93%;
+    --card: 0 0% 4%;
+    --card-foreground: 0 0% 98%;
 
-    --popover: 250 20% 7%;
-    --popover-foreground: 220 20% 93%;
+    --popover: 0 0% 2%;
+    --popover-foreground: 0 0% 98%;
 
-    /* Spectrum primary — electric blue-violet */
-    --primary: 250 75% 62%;
-    --primary-foreground: 0 0% 100%;
+    /* Primary — Electric Cyan */
+    --primary: 195 100% 50%;
+    --primary-foreground: 0 0% 0%;
 
-    --secondary: 250 14% 13%;
-    --secondary-foreground: 220 15% 85%;
+    --secondary: 0 0% 8%;
+    --secondary-foreground: 0 0% 90%;
 
-    --muted: 250 12% 16%;
-    --muted-foreground: 220 12% 50%;
+    --muted: 0 0% 12%;
+    --muted-foreground: 0 0% 65%;
 
-    --accent: 230 70% 58%;
-    --accent-foreground: 0 0% 100%;
+    --accent: 195 100% 50%;
+    --accent-foreground: 0 0% 0%;
 
-    --destructive: 0 62% 55%;
+    --destructive: 0 84% 60%;
     --destructive-foreground: 0 0% 98%;
 
-    --border: 250 12% 14%;
-    --input: 250 12% 14%;
-    --ring: 250 75% 62%;
+    --border: 195 100% 12%;
+    --input: 195 100% 12%;
+    --ring: 195 100% 50%;
 
-    --radius: 0.75rem;
+    --radius: 0.5rem;
 
-    --glow-cyan: 230 70% 58%;
-    --glow-purple: 270 65% 55%;
-    --surface-glass: 250 14% 10%;
+    --glow-cyan: 195 100% 50%;
+    --glow-border: 195 100% 50% / 0.1;
+    --surface-glass: 0 0% 0% / 0.4;
 
-    --sidebar-background: 250 20% 6%;
-    --sidebar-foreground: 220 20% 93%;
-    --sidebar-primary: 250 75% 62%;
-    --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 250 14% 14%;
-    --sidebar-accent-foreground: 220 20% 93%;
-    --sidebar-border: 250 12% 14%;
-    --sidebar-ring: 250 75% 62%;
+    /* Neural 3D Environmental Variables */
+    --neural-bg-gradient: radial-gradient(circle at center, hsl(195 100% 5% / 0.2) 0%, #000000 100%);
+    --bg-image-filter: none;
+    --atmospheric-glow: radial-gradient(circle at center, transparent 30%, hsl(195 100% 5% / 0.15) 100%);
   }
+
+  /* Light theme - Teal & Mint Executive: Professional Green-Bluish Gradient */
+  .light {
+    --background: 180 20% 98%;
+    --foreground: 180 40% 15%;
+
+    --card: 180 20% 100%;
+    --card-foreground: 180 40% 15%;
+
+    --popover: 180 20% 100%;
+    --popover-foreground: 180 40% 15%;
+
+    /* Primary - Electric Cyan */
+    --primary: 195 100% 45%;
+    --primary-foreground: 0 0% 100%;
+
+    /* Secondary - Soft Mint */
+    --secondary: 160 30% 92%;
+    --secondary-foreground: 180 40% 25%;
+
+    --muted: 180 15% 94%;
+    --muted-foreground: 180 15% 45%;
+
+    /* Accent - Cyan-Bluish */
+    --accent: 190 90% 45%;
+    --accent-foreground: 0 0% 100%;
+
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 98%;
+
+    --border: 180 30% 88%;
+    --input: 180 30% 88%;
+    --ring: 180 100% 35%;
+
+    --glow-cyan: 180 100% 35%;
+    --glow-lime: 190 90% 45%;
+    --surface-glass: 180 20% 100%;
+
+    --sidebar-background: 180 20% 97%;
+    --sidebar-foreground: 180 40% 15%;
+    --sidebar-primary: 180 100% 35%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 160 30% 92%;
+    --sidebar-accent-foreground: 180 40% 25%;
+    --sidebar-border: 180 30% 88%;
+    --sidebar-ring: 180 100% 35%;
+
+    /* Neural Background Variables for Light Theme - Green-Bluish Gradient */
+    --neural-bg-gradient: linear-gradient(135deg, hsl(180 20% 98%) 0%, hsl(180 50% 90%) 40%, hsl(190 40% 96%) 100%);
+    --neural-accent-1: radial-gradient(circle at 50% 50%, hsl(180 100% 35% / 0.1) 0%, hsl(180 100% 35% / 0.04) 45%, transparent 70%);
+    --neural-accent-2: radial-gradient(circle at 40% 50%, hsl(190 90% 45% / 0.08) 0%, hsl(190 90% 45% / 0.03) 50%, transparent 70%);
+    --bg-image-filter: invert(1) brightness(0.9) contrast(1.1);
+  }
+
 }
+
+/* Light theme body background without gradient */
+.light body {
+  background: hsl(var(--background)) !important;
+}
+
+
 
 @layer base {
   * {
-    @apply border-border;
+    border-color: hsl(var(--border) / 0.2);
   }
 
   html {
@@ -65,10 +123,27 @@
 
   body {
     @apply bg-background text-foreground font-sans antialiased;
-    font-family: 'Inter', system-ui, sans-serif;
+    font-family: 'Outfit', 'Inter', system-ui, sans-serif;
     overflow-x: hidden;
     max-width: 100vw;
+    letter-spacing: -0.01em;
   }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-sans;
+    font-weight: 800;
+    letter-spacing: -0.04em;
+  }
+
+  h1 {
+    @apply text-4xl sm:text-5xl lg:text-6xl;
+  }
+
+  h2 {
+    @apply text-3xl sm:text-4xl lg:text-5xl;
+  }
+
+
 
   @media (min-width: 1920px) {
     .container {
@@ -98,11 +173,11 @@
 
 @layer components {
   .glass-card {
-    @apply bg-card/40 backdrop-blur-2xl border border-border/30 rounded-2xl;
+    @apply bg-card/40 backdrop-blur-xl rounded-xl;
+    border: 1px solid hsl(var(--primary) / 0.1);
     box-shadow:
-      0 0 0 1px hsl(var(--border) / 0.1),
-      0 2px 4px 0 hsl(var(--background) / 0.3),
-      0 12px 32px -8px hsl(var(--background) / 0.4);
+      inset 0 0 20px hsl(var(--primary) / 0.02),
+      0 10px 30px -10px rgba(0, 0, 0, 0.5);
   }
 
   .glass-card-hover {
@@ -110,44 +185,92 @@
   }
 
   .glass-card-hover:hover {
-    @apply border-primary/20;
+    @apply border-primary/25;
     box-shadow:
-      0 0 0 1px hsl(var(--primary) / 0.08),
-      0 8px 24px -8px hsl(var(--primary) / 0.1),
-      0 20px 60px -16px hsl(var(--primary) / 0.08);
-    transform: translateY(-2px);
+      0 0 0 1px hsl(var(--primary) / 0.15),
+      0 2px 6px 0 hsl(var(--background) / 0.15),
+      0 8px 20px -4px hsl(var(--primary) / 0.08);
+    transform: translateY(-1px);
   }
 
   .glow-cyan {
     box-shadow:
-      0 0 30px hsl(var(--primary) / 0.1),
-      0 0 60px hsl(var(--primary) / 0.05);
+      0 0 20px hsl(var(--primary) / 0.12),
+      0 0 40px hsl(var(--primary) / 0.06);
   }
 
   .glow-text {
-    text-shadow: 0 0 50px hsl(var(--primary) / 0.2);
+    text-shadow: 0 0 30px hsl(var(--primary) / 0.15);
   }
 
   .tech-chip {
-    @apply px-3 py-1.5 text-xs font-mono font-medium rounded-lg bg-secondary/50 border border-border/25 text-muted-foreground transition-all duration-300;
+    @apply px-3 py-1.5 text-xs font-mono font-medium rounded-md bg-secondary/40 border border-border/30 text-muted-foreground transition-all duration-300;
   }
 
   .tech-chip:hover {
-    @apply border-primary/25 text-primary bg-primary/10;
+    @apply border-primary/40 text-primary bg-primary/10;
   }
 
-  /* Prism gradient text — violet → blue → emerald */
-  .gradient-text {
-    @apply bg-clip-text text-transparent;
-    background-image: linear-gradient(135deg, hsl(270 75% 65%), hsl(230 85% 62%), hsl(170 70% 50%));
-  }
+
 
   .neural-grid {
     background-image:
-      linear-gradient(hsl(var(--border) / 0.12) 1px, transparent 1px),
-      linear-gradient(90deg, hsl(var(--border) / 0.12) 1px, transparent 1px);
+      linear-gradient(hsl(var(--border) / 0.08) 1px, transparent 1px),
+      linear-gradient(90deg, hsl(var(--border) / 0.08) 1px, transparent 1px);
     background-size: 60px 60px;
   }
+
+  /* Light theme specific component overrides */
+  .light .glass-card {
+    border: 1px solid hsl(var(--primary) / 0.3);
+    box-shadow:
+      0 0 0 1px hsl(var(--primary) / 0.2),
+      0 0 20px hsl(var(--primary) / 0.15),
+      inset 0 0 20px hsl(var(--primary) / 0.08),
+      0 2px 8px hsl(0 0% 0% / 0.3);
+  }
+
+  .light .glass-card-hover:hover {
+    border-color: hsl(var(--primary) / 0.6);
+    box-shadow:
+      0 0 0 1px hsl(var(--primary) / 0.4),
+      0 0 30px hsl(var(--primary) / 0.3),
+      inset 0 0 30px hsl(var(--primary) / 0.12),
+      0 4px 16px hsl(0 0% 0% / 0.4);
+    transform: translateY(-2px);
+  }
+
+  .light .glow-cyan {
+    box-shadow:
+      0 0 20px hsl(var(--primary) / 0.25),
+      0 0 40px hsl(var(--primary) / 0.15),
+      inset 0 0 20px hsl(var(--primary) / 0.05);
+  }
+
+  .light .tech-chip {
+    background: hsl(var(--card) / 0.6);
+    border: 1px solid hsl(var(--primary) / 0.25);
+    box-shadow: 0 0 10px hsl(var(--primary) / 0.1);
+  }
+
+  .light .tech-chip:hover {
+    border-color: hsl(var(--primary) / 0.6);
+    background: hsl(var(--card) / 0.8);
+    box-shadow: 0 0 20px hsl(var(--primary) / 0.3);
+  }
+
+
+
+  .light .border-gradient {
+    border: 1px solid hsl(var(--primary) / 0.25);
+  }
+
+  .light .border-gradient::before {
+    background: linear-gradient(135deg, hsl(var(--primary) / 0.3), hsl(var(--accent) / 0.2));
+    filter: blur(8px);
+  }
+
+
 
   @media (min-width: 1920px) {
     .neural-grid {
@@ -166,7 +289,7 @@
     position: absolute;
     inset: -1px;
     border-radius: calc(var(--radius) + 1px);
-    background: linear-gradient(135deg, hsl(var(--primary) / 0.25), transparent 50%, hsl(170 70% 50% / 0.15));
+    background: linear-gradient(135deg, hsl(var(--primary) / 0.2), transparent 50%, hsl(var(--primary) / 0.1));
     z-index: -1;
     opacity: 0;
     transition: opacity 0.5s ease;
