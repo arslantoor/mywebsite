@@ -14,7 +14,6 @@ const categories = [
   {
     title: 'AI & Automation',
     icon: Brain,
-    color: 'from-cyan-500 to-blue-500',
     technologies: [
       'LangChain', 'LlamaIndex', 'OpenAI GPT-4', 'Claude', 
       'Hugging Face', 'PyTorch', 'TensorFlow', 'RAG Systems',
@@ -24,7 +23,6 @@ const categories = [
   {
     title: 'Backend',
     icon: Server,
-    color: 'from-purple-500 to-pink-500',
     technologies: [
       'Python', 'FastAPI', 'Node.js', 'TypeScript',
       'PostgreSQL', 'Redis', 'GraphQL', 'REST APIs',
@@ -34,7 +32,6 @@ const categories = [
   {
     title: 'Cloud',
     icon: Cloud,
-    color: 'from-green-500 to-emerald-500',
     technologies: [
       'AWS', 'GCP', 'Azure', 'Kubernetes',
       'Docker', 'Terraform', 'CI/CD', 'MLFlow',
@@ -44,7 +41,6 @@ const categories = [
   {
     title: 'Security',
     icon: Shield,
-    color: 'from-orange-500 to-red-500',
     technologies: [
       'OAuth 2.0', 'JWT', 'RBAC', 'Encryption',
       'API Security', 'Penetration Testing', 'OWASP',
@@ -112,8 +108,8 @@ export const TechStackSection = () => {
             >
               {/* Category Header */}
               <div className="flex items-center gap-3 sm:gap-4 mb-4 sm:mb-6">
-                <div className={`p-2 sm:p-2.5 md:p-3 lg:p-4 rounded-xl bg-gradient-to-br ${category.color} bg-opacity-20`}>
-                  <category.icon className="w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6 lg:w-7 lg:h-7 text-foreground" />
+                <div className="p-2.5 sm:p-3 lg:p-4 rounded-xl bg-primary/10">
+                  <category.icon className="w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6 lg:w-7 lg:h-7 text-primary" />
                 </div>
                 <h3 className="text-base sm:text-lg md:text-xl lg:text-2xl xl:text-3xl font-semibold text-foreground">{category.title}</h3>
               </div>
