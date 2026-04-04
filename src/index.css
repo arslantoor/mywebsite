@@ -138,7 +138,7 @@
   }
 
   .tech-chip:hover {
-    @apply border-primary/30 text-primary bg-primary/8;
+    @apply border-primary/30 text-primary bg-primary/[0.08];
   }
 
   /* Gradient text — soft elegant gradient */
