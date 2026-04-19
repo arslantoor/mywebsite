@@ -34,11 +34,11 @@ export const HeroSection = () => {
             <p className="text-lg sm:text-xl md:text-2xl lg:text-3xl text-muted-foreground font-light tracking-widest uppercase">
               Senior AI Systems Engineer
             </p>
-            
+
             <div className="w-12 h-[1px] bg-primary/40" />
-            
+
             <p className="max-w-2xl text-sm sm:text-base md:text-lg text-muted-foreground/60 leading-relaxed font-light">
-              6+ years of engineering autonomous agents and neural frameworks. 
+              6+ years of engineering autonomous agents and neural frameworks.
               Bridging the gap between frontier research and production infrastructure.
             </p>
           </motion.div>
@@ -57,12 +57,12 @@ export const HeroSection = () => {
               <span>Explore Work</span>
               <div className="w-[1px] h-12 bg-gradient-to-b from-primary to-transparent" />
             </a>
-            
+
             <div className="flex items-center gap-8">
               {[
                 { icon: Github, href: 'https://github.com/arslantoor' },
                 { icon: Linkedin, href: 'https://linkedin.com/in/arslantoor' },
-                { icon: Mail, href: 'mailto:hello@arslan.ai' },
+                { icon: Mail, href: 'mailto:muhammadarslantoor@gmail.com' },
               ].map(({ icon: Icon, href }) => (
                 <a
                   key={href}
