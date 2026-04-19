@@ -61,7 +61,7 @@ export const HeroSection = () => {
             <div className="flex items-center gap-8">
               {[
                 { icon: Github, href: 'https://github.com/arslantoor' },
-                { icon: Linkedin, href: 'https://linkedin.com/in/arslantoor' },
+                { icon: Linkedin, href: 'https://www.linkedin.com/in/muhammad-arslan-toor' },
                 { icon: Mail, href: 'mailto:muhammadarslantoor@gmail.com' },
               ].map(({ icon: Icon, href }) => (
                 <a
