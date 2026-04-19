@@ -94,8 +94,7 @@ export const Footer = () => {
           </div>
           <p className="text-xs text-muted-foreground font-mono flex items-center gap-2">
             Engineered with <span className="text-primary italic animate-pulse">Neural Logic</span>
-            <span className="opacity-30">|</span>
-            <span>React + Three.js</span>
+            <span className="opacity-30"></span>
           </p>
         </div>
       </div>
