@@ -68,7 +68,7 @@ export const Footer = () => {
               </p>
               <div className="space-y-2">
                 <p className="text-xs font-mono text-primary">muhammadarslantoor@gmail.com</p>
-                <p className="text-xs text-muted-foreground">Berlin, Germany / Remote</p>
+                <p className="text-xs text-muted-foreground">Lahore, Pakistan / Remote</p>
               </div>
               <a
                 href="mailto:muhammadarslantoor@gmail.com?subject=Consultation%20Request"
