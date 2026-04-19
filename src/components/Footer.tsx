@@ -5,7 +5,7 @@ export const Footer = () => {
     <footer id="contact" className="relative py-16 sm:py-24 border-t border-primary/10 overflow-hidden bg-background">
       {/* Subtle background glow */}
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-[1px] bg-gradient-to-r from-transparent via-primary/50 to-transparent" />
-      
+
       <div className="container mx-auto px-6 lg:px-12 xl:px-20 max-w-7xl">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-8">
           {/* Brand & Mission */}
@@ -19,15 +19,15 @@ export const Footer = () => {
               </span>
             </a>
             <p className="text-muted-foreground text-sm leading-relaxed mb-8">
-              Engineering the future of autonomous systems and neural decision frameworks. 
+              Engineering the future of autonomous systems and neural decision frameworks.
               6+ years of building production AI that scales from prototype to global infrastructure.
             </p>
             <div className="flex items-center gap-3">
               {[
                 { icon: Github, href: 'https://github.com/arslantoor', label: 'GitHub' },
-                { icon: Linkedin, href: 'https://linkedin.com/in/arslantoor', label: 'LinkedIn' },
+                { icon: Linkedin, href: 'https://www.linkedin.com/in/muhammad-arslan-toor', label: 'LinkedIn' },
                 { icon: Twitter, href: '#', label: 'Twitter' },
-                { icon: Mail, href: 'mailto:hello@arslan.ai', label: 'Email' },
+                { icon: Mail, href: 'mailto:muhammadarslantoor@gmail.com', label: 'Email' },
               ].map(({ icon: Icon, href, label }) => (
                 <a
                   key={label}
@@ -67,11 +67,11 @@ export const Footer = () => {
                 Open for consulting engagements, technical partnerships, and strategic AI initiatives.
               </p>
               <div className="space-y-2">
-                <p className="text-xs font-mono text-primary">hello@arslan.ai</p>
+                <p className="text-xs font-mono text-primary">muhammadarslantoor@gmail.com</p>
                 <p className="text-xs text-muted-foreground">Berlin, Germany / Remote</p>
               </div>
               <a
-                href="mailto:hello@arslan.ai?subject=Consultation%20Request"
+                href="mailto:muhammadarslantoor@gmail.com?subject=Consultation%20Request"
                 className="inline-block mt-4 px-4 py-2 rounded-lg bg-primary/10 border border-primary/30 text-primary text-xs font-medium hover:bg-primary/20 hover:border-primary/50 transition-all duration-300"
               >
                 Request Consultation
@@ -93,8 +93,8 @@ export const Footer = () => {
             </div>
           </div>
           <p className="text-xs text-muted-foreground font-mono flex items-center gap-2">
-            Engineered with <span className="text-primary italic animate-pulse">Neural Logic</span> 
-            <span className="opacity-30">|</span> 
+            Engineered with <span className="text-primary italic animate-pulse">Neural Logic</span>
+            <span className="opacity-30">|</span>
             <span>React + Three.js</span>
           </p>
         </div>
