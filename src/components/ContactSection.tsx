@@ -102,14 +102,14 @@ export const ContactSection = () => {
             <p className="text-sm sm:text-lg md:text-xl lg:text-2xl text-muted-foreground max-w-xl leading-relaxed">
               Whether you have a breakthrough idea or just want to discuss the future of AI engineering, my inbox is always open.
             </p>
-            
+
             <div className="mt-12 space-y-6">
-               <div className="flex items-center gap-4 group cursor-pointer">
-                  <div className="w-12 h-12 rounded-full bg-zinc-900 border border-white/5 flex items-center justify-center group-hover:border-primary/40 transition-all">
-                     <Mail className="w-5 h-5 text-muted-foreground group-hover:text-primary transition-colors" />
-                  </div>
-                  <span className="text-lg font-medium text-foreground group-hover:text-primary transition-colors">arslan@neuralcommand.ai</span>
-               </div>
+              <div className="flex items-center gap-4 group cursor-pointer">
+                <div className="w-12 h-12 rounded-full bg-zinc-900 border border-white/5 flex items-center justify-center group-hover:border-primary/40 transition-all">
+                  <Mail className="w-5 h-5 text-muted-foreground group-hover:text-primary transition-colors" />
+                </div>
+                <span className="text-lg font-medium text-foreground group-hover:text-primary transition-colors">muhammadarslantoor@gmail.com</span>
+              </div>
             </div>
           </motion.div>
 
@@ -194,9 +194,9 @@ export const ContactSection = () => {
                         rows={1}
                         className="w-full bg-transparent border-b border-white/10 py-4 text-xl sm:text-2xl text-foreground placeholder:text-zinc-700 focus:outline-none focus:border-primary transition-colors peer resize-none overflow-hidden"
                         onInput={(e) => {
-                           const target = e.target as HTMLTextAreaElement;
-                           target.style.height = 'auto';
-                           target.style.height = `${target.scrollHeight}px`;
+                          const target = e.target as HTMLTextAreaElement;
+                          target.style.height = 'auto';
+                          target.style.height = `${target.scrollHeight}px`;
                         }}
                       />
                       <div className="absolute bottom-0 left-0 w-0 h-[1px] bg-primary transition-all duration-500 peer-focus:w-full" />
